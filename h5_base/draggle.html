@@ -1,0 +1,45 @@
+<html>
+<head>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="jqueryui/jquery-ui.min.js"></script>
+    <style>
+      .draggable { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 0 10px 10px 0; }
+      #draggable { margin-bottom:20px; border:1px solid red;width:250px;height:250px;}
+      #draggable { cursor: n-resize; }
+      #containment-wrapper { width: 95%; height:150px; border:2px solid #ccc; padding: 10px; }
+    h3 { clear: left; }
+        #draggable3 {border:1px solid red;}
+        #draggable4 {border:1px solid red;}
+  </style>
+</head>
+<body>
+    <div id="containment-wrapper">
+      <div id="draggable3" class="draggable ui-widget-content">
+        <p>I'm contained within the box</p>
+      </div>
+
+      <div class="draggable ui-widget-content">
+        <p id="draggable4" class="ui-widget-header">I'm contained within my parent</p>
+      </div>
+    </div>
+    
+    <div id="draggable" class="ui-widget-content">
+      <p style="border:1px solid green;" class="ui-widget-header">I can be dragged only by this handle</p>
+    </div>
+    <div class="dd" style="width:200px;border:1px solid red;">
+        <input value="可拖动" style="width:180px;" />
+    </div>
+    <div></div>
+    
+    <p draggable="true">原生可拖动</p>
+    <script>
+      $(function() {
+            $( "#draggable" ).draggable({ scroll: true , handle: "p"});
+            $( "#draggable3" ).draggable({ containment: "#containment-wrapper", scroll: false });
+            $( "#draggable4" ).draggable({ containment: "parent" });
+          
+            $( ".dd" ).draggable();
+      } );
+  </script>
+</body>
+</html>

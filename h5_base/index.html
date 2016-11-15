@@ -1,0 +1,27 @@
+<html>
+<head>
+    <script src="jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <script>
+        function getURL(){
+            $.ajax({
+                url:"http://api.sipedu.org/datahub/teacher/getTeacherRk/1.0.0?SchoolGUID=355ADEE40AA043AE8055D3777D42D4E3&TeacherGUID=",
+                success:function(result){
+                    console.info(result);
+                    setTimeout("getURL()",1000);
+                },
+                error:function(){
+                    setTimeout("getURL()",1000);
+                },
+                beforeSend: function(request) {
+                    request.setRequestHeader("Authorization", "Bearer 58934a15b6d6906e566c29696daaf8");
+                },
+                crossDomain:true
+            });
+        };
+        
+        getURL();
+    </script>
+</body>
+</html>

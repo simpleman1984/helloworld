@@ -1,0 +1,101 @@
+<html>
+<head>
+    <!--<link rel="stylesheet" href="range/jquery.range.css">-->
+    
+    <link rel="stylesheet/less" type="text/css" href="range/jquery.range.less" />
+    
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="range/jquery.range.js"></script>
+    <script src="less/less.min.js"></script>
+</head>
+<body>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <input type="hidden" class="range-slider" value="20,800" />
+    <script>
+        $('.range-slider').jRange({
+            from: 0,
+            to: 1000,
+            step: 1,
+            scale: [0,200,400,600,800,1000],
+            width: 1000,
+            snap:true,
+            showLabels: true,
+            isRange : true,
+            theme:"theme-video",
+            ondragend:function(value,e){
+                var target = e.target;
+                console.info(target,"ondragend      :   "+value);
+            },
+            //移除资源节点回调
+            onremoveres:function(resPointer){
+                console.info("即将删除节点:",resPointer);
+                return true;
+            }
+        });
+        
+        var resTemplate = "<div class=\"pointer res\"><img style=\"display:none;\" src=\"range/delet.png\"></div>";
+        //$('.range-slider').jRange('setValue', '0,500');
+        $('.range-slider').jRange('insertPointer', {
+            id:"xx",//代表当前字样的唯一id
+            className:"txt",
+            pos:400
+        },resTemplate);
+        
+        $('.range-slider').jRange('insertPointer', {
+            id:"xx1",
+            className:"txt",
+            pos:600
+        },resTemplate);
+        
+        var curPos = 100;
+        $('.range-slider').jRange('insertPointer', {
+            id:"timeline",
+            className:"timeline",
+            pos:curPos
+        });
+        
+        function updateVideo(){
+            curPos = curPos + 20;
+            $('.range-slider').jRange('updateResPointer',"timeline", curPos);
+            setTimeout("updateVideo()",1000)
+        };
+        updateVideo();
+    </script>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <input type="hidden" class="slider-input" value="23" />
+    <script>
+//        $('.slider-input').jRange({
+//            from: -2.0,
+//            to: 2.0,
+//            step: 0.5,
+//            scale: [-2.0,-1.0,0.0,1.0,2.0],
+//            format: '%s',
+//            width: 1000,
+//            showLabels: true,
+//            snap: true
+//        });
+    </script>
+</body>
+</html>
