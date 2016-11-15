@@ -37,6 +37,27 @@ define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (ang
                 templateUrl: "../modules/base/service.html",
                 controllerUrl: "../modules/base/service.js"
             }))
+        
+            //controller
+            .state("controller", angularAMD.route({
+                url: "/controller",
+                templateUrl: "../modules/base/controller.html",
+                controllerUrl: "../modules/base/controller.js"
+            }))
+        
+            //filter
+            .state("filter", angularAMD.route({
+                url: "/filter",
+                templateUrl: "../modules/base/filter.html",
+                controllerUrl: "../modules/base/filter.js"
+            }))
+        
+            //directive
+            .state("directive", angularAMD.route({
+                url: "/directive",
+                templateUrl: "../modules/base/directive.html",
+                controllerUrl: "../modules/base/directive.js"
+            }))
         ;   		
     };        
         
