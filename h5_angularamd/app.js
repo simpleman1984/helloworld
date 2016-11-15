@@ -72,6 +72,32 @@ define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (ang
     // config
     app.config(["$stateProvider", "$urlRouterProvider", registerRoutes]);
     
+    //定义provider
+    app.provider('value', function UnicornLauncherProvider() {
+        console.info("value：我只执行一次");
+        
+        var val ;
+        var RET = function(_c){
+            var c = _c ;
+            this.v = function(){
+                return c;
+            }
+        };
+        this.value = function(value) {
+            val = "provider:_" + value;
+        };
+        
+        this.$get = function () {
+            return new RET(val);
+        };
+    
+    });
+    app.config(["valueProvider", function(valueProvider) {
+        console.info("valueProvider：我只执行一次");
+        
+        valueProvider.value("inited");
+    }]);
+    
     //生成 UUID方法
     var UUID = (function (uuidRegEx, uuidReplacer) { 
         return function () { 
