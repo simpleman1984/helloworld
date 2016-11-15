@@ -13,22 +13,22 @@ define(["angular", "angularAMD", "angular-ui-router"], function (angular, angula
             // home
             .state("home", angularAMD.route({
                 url: "/home",
-                templateUrl: "../home.html",
-                controllerUrl: "../home.js"
+                templateUrl: "../modules/base/home/home.html",
+                controllerUrl: "../modules/base/home/home.js"
             }))
         
             // ngloadtest
             .state("ngloadtest", angularAMD.route({
                 url: "/ngloadtest",
-                templateUrl: "../ngloadtest.html",
-                controllerUrl: "../ngloadtest.js"
+                templateUrl: "../modules/base/ngloadtest.html",
+                controllerUrl: "../modules/base/ngloadtest.js"
             }))
 			
 			// home
             .state("about", angularAMD.route({
                 url: "/about",
-                templateUrl: "../about.html",
-                controllerUrl: "../about.js"
+                templateUrl: "../modules/base/about.html",
+                controllerUrl: "../modules/base/about.js"
             }))
         ;   		
     };        

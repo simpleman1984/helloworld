@@ -15,9 +15,10 @@
 </head>
 <body>
 	<!-- content -->
-	<div ui-view></div>	
+	<div style="border:1px solid blue;" ui-view></div>	
     
-    <div ng-test="xx" controller-url="show" controller-html="../show.html"></div>
+    <!-- 动态模块，动态url -->
+    <div ng-test="xx" controller-url="show" controller-html="show.html"></div>
     
 </body>
 </html>

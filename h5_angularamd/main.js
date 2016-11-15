@@ -1,5 +1,5 @@
 require.config({
-    baseUrl:"bower_components",
+    baseUrl:"/",
     paths: {
         // angular
         "angular": "/bower_components/angular/angular",
@@ -13,7 +13,10 @@ require.config({
         "layer":"/bower_components/layer/layer",
         "asyncLoader":"/bower_components/loader/asyncLoader",
         
-        "show":"../show"
+        //text
+        "text":"/bower_components/requirejs/text",
+        
+        "show":"modules/base/show"
     },
     shim: {        
         // angular
