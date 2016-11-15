@@ -1,0 +1,19 @@
+<h1>{{ title }}</h1>
+<br/>
+<button ui-sref="about">About</button>
+
+<br/>
+
+<button ui-sref="ngloadtest">ngloadtest</button>
+
+
+<br/>
+
+<button ng-click="showModal()">弹出页面</button>
+
+<button ng-click="setValue()">清空弹出页面</button>
+<br/>
+动态加载模块~
+<!--<div ng-test="xx" controller-url="show" controller-html="../show.html"></div>-->
+
+<div ng-include="'home_include.html'"></div>
