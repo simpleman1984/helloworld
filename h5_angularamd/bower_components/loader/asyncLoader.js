@@ -2,9 +2,10 @@ define(["layer"], function (layer) {
     
     //初始化layer加载路径~
     layer.config({
-      extend: [
-        'extend/layer.ext.js'
-      ]
+        path:"/bower_components/layer/",
+        extend: [
+            'extend/layer.ext.js'
+        ]
     });
     
     //生成 UUID方法

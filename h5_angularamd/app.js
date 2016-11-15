@@ -1,5 +1,5 @@
 // bootstrap
-define(["angular", "angularAMD", "angular-ui-router"], function (angular, angularAMD) {
+define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (angular, angularAMD) {
         
     // routes
     var registerRoutes = function($stateProvider, $urlRouterProvider) {
@@ -29,6 +29,13 @@ define(["angular", "angularAMD", "angular-ui-router"], function (angular, angula
                 url: "/about",
                 templateUrl: "../modules/base/about.html",
                 controllerUrl: "../modules/base/about.js"
+            }))
+        
+            //service
+            .state("service", angularAMD.route({
+                url: "/service",
+                templateUrl: "../modules/base/service.html",
+                controllerUrl: "../modules/base/service.js"
             }))
         ;   		
     };        

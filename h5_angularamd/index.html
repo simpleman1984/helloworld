@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>	  
-    
-	<!-- meta -->
-	<meta charset="utf-8">
-	
-	<!-- title -->
-	<title></title>
-		
-	<!-- script -->
-    <script src="bower_components/jquery-1.12.3.js"></script>
-	<script data-main="main.js" src="bower_components/requirejs/require.js"></script>
-    
+
+<head>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+
+    <!-- title -->
+    <title></title>
+
+    <link rel='stylesheet' href="bower_components/bootstrap/css/bootstrap.css">
 </head>
+
 <body>
-	<!-- content -->
-	<div style="border:1px solid blue;" ui-view></div>	
-    
-    <!-- 动态模块，动态url -->
-    <div ng-test="xx" controller-url="show" controller-html="show.html"></div>
-    
+    <nav style="margin-bottom:0" class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/home">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">基础 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/about">about</a></li>
+                            <li><a href="#/service">service</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid">
+        <div class="row" ui-view></div>
+    </div>
+
+    <!-- script -->
+    <script src="bower_components/jquery-1.12.3.js"></script>
+    <script data-main="main.js" src="bower_components/requirejs/require.js"></script>
 </body>
+
 </html>

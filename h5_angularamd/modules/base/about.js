@@ -1,10 +1,11 @@
 define(["layer"], function (layer) {
 	
     layer.config({
-      extend: [
-        'extend/layer.ext.js'
-      ]
-    })
+        path:"/bower_components/layer/",
+        extend: [
+            'extend/layer.ext.js'
+        ]
+    });
     
 	// controller
 	return ["$scope", function ($scope) {

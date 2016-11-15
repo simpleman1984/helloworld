@@ -15,6 +15,7 @@ require.config({
         
         //text
         "text":"/bower_components/requirejs/text",
+        "bootstrap":"/bower_components/bootstrap/js/bootstrap",
         
         "show":"modules/base/show"
     },

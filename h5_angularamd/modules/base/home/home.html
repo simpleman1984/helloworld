@@ -1,17 +1,21 @@
-<h1>{{ title }}</h1>
-<br/>
-<button ui-sref="about">About</button>
-<br/>
-<button ui-sref="ngloadtest">ngloadtest</button>
-<br/>
-<button ng-click="showModal()">弹出页面</button>
+<div class="col-md-12" style="border:1px solid blue;">
+    <h1>{{ title }}</h1>
+    <br/>
+    <button ui-sref="about">About</button>
+    <br/>
+    <button ui-sref="ngloadtest">ngloadtest</button>
+    <br/>
+    <button ng-click="showModal()">弹出页面</button>
 
-<button ng-click="setValue()">调用动态模块页面</button>
-<br/>
-动态加载模块~
-<!--<div ng-test="xx" controller-url="show" controller-html="../show.html"></div>-->
-<select ng-model="template" ng-options="t.name for t in templates">
-   <option value="">(blank)</option>
-</select>
+    <button ng-click="setValue()">调用动态模块页面</button>
+    <br/> 动态加载模块~
+    <!--<div ng-test="xx" controller-url="show" controller-html="../show.html"></div>-->
+    <select ng-model="template" ng-options="t.name for t in templates">
+       <option value="">(blank)</option>
+    </select>
 
-<div class="slide-animate" ng-include="template.url"></div>
+    <!-- 动态模块，动态url -->
+    <div class="slide-animate" ng-include="template.url"></div>
+
+    <!--<div ng-test="xx" controller-url="show" controller-html="show.html"></div>-->
+</div>
