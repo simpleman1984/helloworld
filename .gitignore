@@ -2,3 +2,12 @@
 /storm_base/target
 /spark-test/target
 /java_mp3
+/spring_boot/target
+/solr_base/target
+/java_test/target
+/java_ssh/target
+/java_sigar/target
+/java_dubbo/target
+/java_base/target
+/guava_base/target
+/elasticsearch_base/target
