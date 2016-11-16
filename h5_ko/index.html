@@ -1,0 +1,14 @@
+<html>
+<head>
+    <script src="knockout-3.4.0.debug.js"></script>
+</head>
+<body id="body">
+    <div data-bind="text:text"></div>
+    <div data-bind="text:text"></div>
+    <script>
+        function Page(){
+            this.text = "page 文字";
+        }
+        ko.applyBindings(new Page(),document.getElementById("body"));
+    </script>
+</body></html>

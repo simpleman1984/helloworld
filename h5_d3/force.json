@@ -1,0 +1,21 @@
+{
+	"nodes": [
+		{
+			"gid":"acc:1",
+			"name": "0",
+			"image":"/assets/img/account.jpg"
+		},
+		{
+			"gid":"acc:2",
+			"name": "1",
+			"image":"/assets/img/account.jpg"
+		}
+	],
+	"edges": [
+		{
+			"source": 0,
+			"target": 1,
+			"relation": ""
+		}
+	]
+}
