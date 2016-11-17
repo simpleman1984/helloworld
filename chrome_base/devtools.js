@@ -33,10 +33,12 @@ var console_ = function(msg){
 console_(1);
 chrome.devtools.panels.create("Font Picker",
                               "bd.png",
-                              "panel.html"
+                              "panel.html",
                               function(panel) {
-        alert(12);
+        
 });
+//https://developer.chrome.com/extensions/devtools_network#type-Request
+//https://developer.chrome.com/extensions/devtools_panels
 console.info(3);
 console_(2);
 
