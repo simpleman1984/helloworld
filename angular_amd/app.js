@@ -26,7 +26,7 @@ define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (ang
 			
 			// home
             .state("about", angularAMD.route({
-                url: "/about",
+                url: "/about/{aboutid}",
                 templateUrl: "../modules/base/about.html",
                 controllerUrl: "../modules/base/about.js"
             }))

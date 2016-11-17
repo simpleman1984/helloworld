@@ -8,10 +8,10 @@ define(["layer"], function (layer) {
     });
     
 	// controller
-	return ["$scope", function ($scope) {
+	return ["$scope", "$transition",function ($scope,$transition$) {
 		
 		// properties
-	    $scope.title = "This is About page";
+	    $scope.title = "This is About page,参数为:" + $transition$.params().aboutid;
         
         $scope.layerFunc = function(){
             layer.msg("ddddddddddd");
