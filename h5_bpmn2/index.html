@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <!-- necessary stylesheets -->
+    <link rel="stylesheet" href="bpmn/assets/diagram-js.css" />
+    <link rel="stylesheet" href="bpmn/assets/bpmn-font/css/bpmn-embedded.css" />
+</head>
+
+<body>
+    <script src="bpmn/bpmn-viewer.js"></script>
+    <script src="bpmn/bpmn-modeler.js"></script>
+
+    <div id="canvas" style="width:600px;height:600px;"></div>
+    <script>
+        var BpmnViewer = window.BpmnJS;
+
+
+        var viewer = new BpmnViewer({
+            container: '#canvas'
+        });
+
+//        viewer.importXML(pizzaDiagram, function(err) {
+//
+//            if (!err) {
+//                console.log('success!');
+//                viewer.get('canvas').zoom('fit-viewport');
+//            } else {
+//                console.log('something went wrong:', err);
+//            }
+//        });
+
+    </script>
+</body>
+
+</html>
