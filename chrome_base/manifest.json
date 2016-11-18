@@ -6,7 +6,9 @@
    "background": { "scripts": ["background.js"] },
   "permissions": [
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "clipboardWrite",
+    "clipboardRead"
   ],
   "manifest_version": 2
 }

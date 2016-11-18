@@ -1,10 +1,25 @@
-<html>
+<!doctype html>
+<html ng-app="app">
     <head>
     </head>
     <body>
-        <input id="val" />
-        <button id="btn">search</button>
+        <div ng-controller="ctl">
+            <div>
+                <input  ng-model="val"/>
+                <button type="button" ng-click="clear()">clear</button>
+                <span>url cached count:{{urlSize}}</span>
+                <span ng-show="urlSize==0">F5 Reload The Page!</span>
+            </div>
+            <div>
+                <ul>
+                    <li ng-repeat="url in urlList | filter:search">{{url.url}}<button ng-click="copyText(url.url)">copy</button></li>
+                </ul>
+            </div>
+        </div>
+        <textarea id="text" style="width:100%;min-height:150px;">
+        </textarea>
         <script src="jquery.min.js"></script>
+        <script src="angular.min.js"></script>
         <script src="panel.js"></script>
     </body>
 </html>

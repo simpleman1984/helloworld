@@ -31,11 +31,11 @@ var console_ = function(msg){
 };
 
 console_(1);
-chrome.devtools.panels.create("Font Picker",
+chrome.devtools.panels.create("NetWork Searcher",
                               "bd.png",
                               "panel.html",
                               function(panel) {
-        
+        console.log("hello from callback",panel);
 });
 //https://developer.chrome.com/extensions/devtools_network#type-Request
 //https://developer.chrome.com/extensions/devtools_panels
