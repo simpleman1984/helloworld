@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <title>My HTML File</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <script src="angular.min.js"></script>
+</head>
+
+<body ng-controller="PhoneListController">
+
+    <p>Nothing here {{'yet' + '!'}}</p>
+    <p>
+        Search:
+        <input ng-model="query" />
+    </p>
+    <p>
+        Sort by:
+        <select ng-model="orderProp">
+            <option value="name">Alphabetical</option>
+            <option value="age">Newest</option>
+        </select>
+    </p>
+    <ul>
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+            <span>{{phone.name}}</span>
+            <p>{{phone.snippet}}</p>
+        </li>
+    </ul>
+
+    <greet-user></greet-user>
+
+    <script>
+        // Define the `phonecatApp` module
+        var app = angular.module('app', []);
+
+        app.component('greetUser', {
+            template: 'Hello, {{$ctrl.user}},我是自定义组件！！!',
+            controller: function GreetUserController() {
+                this.user = 'world';
+            }
+        });
+
+        // Define the `PhoneListController` controller on the `phonecatApp` module
+        app.controller('PhoneListController', function PhoneListController($scope) {
+            $scope.phones = [{
+                name: 'Nexus S',
+                snippet: 'Fast just got faster with Nexus S.'
+            }, {
+                name: 'Motorola XOOM™ with Wi-Fi',
+                snippet: 'The Next, Next Generation tablet.'
+            }, {
+                name: 'MOTOROLA XOOM™',
+                snippet: 'The Next, Next Generation tablet.'
+            }];
+        });
+
+    </script>
+</body>
+
+</html>
