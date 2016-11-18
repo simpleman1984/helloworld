@@ -9,17 +9,40 @@
 <body>
     <script src="bpmn/bpmn-viewer.js"></script>
     <script src="bpmn/bpmn-modeler.js"></script>
+    <script src="jquery.min.js"></script>
+    
+    <div id="canvas" style="width:100%;height:100%;"></div>
+    <div class="io-alerts">
 
-    <div id="canvas" style="width:600px;height:600px;"></div>
+        <div class="io-control alert" jswidget="import-warnings-alert">
+          <a href class="close" aria-hidden="true" jsaction="click:bio.clearImportDetails">&times;</a>
+          Diagram may not render correctly due to import warnings.
+
+          <a href jsaction="click:bio.showImportDetails">Show details</a>.
+        </div>
+
+        <div class="io-control alert" jswidget="undo-redo-alert">
+          You edited the diagram.
+
+          <a href jsaction="click:bio.undo">Undo last change</a>.
+
+          <a href class="close" aria-hidden="true" jsaction="click:bio.hideUndoAlert">&times;</a>
+        </div>
+
+      </div>
+      <div style="bottom: 25px;position: fixed;left: 20px;">
+        <button type="button" onclick="saveSVG()">下载svg</button>
+        <button type="button" onclick="saveDiagram()">下载bpmn</button>
+      </div>
     <script>
         var BpmnViewer = window.BpmnJS;
 
 
-        var viewer = new BpmnViewer({
-            container: '#canvas'
-        });
-
-//        viewer.importXML(pizzaDiagram, function(err) {
+//        var viewer = new BpmnViewer({
+//            container: '#canvas'
+//        });
+//
+//        viewer.importXML("bpmn2.xml", function(err) {
 //
 //            if (!err) {
 //                console.log('success!');
@@ -28,7 +51,130 @@
 //                console.log('something went wrong:', err);
 //            }
 //        });
+        
+        var container = $('<div class="bjs-container"></div>');
+        var canvas = '#canvas';
+        var modeler = new BpmnJS({
+          container: canvas,
+          keyboard: { bindTo: document },
+          additionalModules: [
+          ]
+        });
+        
+        $.get("bpmn2.txt",function(bpmn2){
+            console.info(bpmn2);
+            modeler.importXML(bpmn2, function(err) {
+                if (!err) {
+                    console.log('success!');
+                    modeler.get('canvas').zoom('fit-viewport');
+                } else {
+                    console.log('something went wrong:', err);
+                }
+            });
+        });
+        
+        modeler.on('import.done', function(event) {
+          var error = event.error,
+              warnings = event.warnings;
 
+          if (error) {
+            setError(error);
+          } else {
+            // async scale to fit-viewport (prevents flickering)
+            setTimeout(function() {
+              modeler.get('canvas').zoom('fit-viewport');
+              setStatus('shown');
+            }, 0);
+
+            setStatus('loaded');
+          }
+
+          showWarnings(warnings);
+        });
+        
+        createDiagram();
+        
+        function createDiagram() {
+          modeler.createDiagram(function(err) {
+            if (err) {
+              track('diagram', 'create', 'error');
+            } else {
+              track('diagram', 'create', 'success');
+
+              // select start event so people can continue to do stuff
+              modeler.get('selection').select(
+                modeler.get('elementRegistry').get('StartEvent_1')
+              );
+            }
+          });
+        }
+        
+        function saveSVG() {
+          modeler.saveSVG(function(err, svg) {
+              console.info("svg:"+svg);
+          });
+        }
+
+        function saveDiagram(done) {
+          modeler.saveXML({ format: true }, function(err, xml) {
+            console.info("xml:"+xml);
+          });
+        }
+        
+        
+        //======================================================================
+        var track = function() {};
+        var states = [ 'error', 'loading', 'loaded', 'shown', 'intro' ];
+        var widgets = {};
+
+        $('[jswidget]').each(function() {
+            var element = $(this),
+                jswidget = element.attr('jswidget');
+
+            widgets[jswidget] = element;
+        });
+        
+        function setStatus(status) {
+          $(document.body).removeClass(states.join(' ')).addClass(status);
+        }
+        
+        function setError(err) {
+          setStatus('error');
+
+          container.find('.error .error-log').val(err.message);
+
+          console.error(err);
+        }
+
+        function showWarnings(warnings) {
+
+          var show = warnings && warnings.length;
+
+          toggleVisible(widgets['import-warnings-alert'], show);
+
+          if (!show) {
+            return;
+          }
+
+          console.warn('imported with warnings');
+
+          var messages = '';
+
+          warnings.forEach(function(w) {
+            console.log(w);
+            messages += (w.message + '\n\n');
+          });
+
+          var dialog = widgets['import-warnings-dialog'];
+
+          dialog.find('.error-log').val(messages);
+        }
+
+        function toggleVisible(element, show) {
+          element[show ? 'addClass' : 'removeClass']('open');
+        }
+        
+        
     </script>
 </body>
 
