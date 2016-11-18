@@ -10,6 +10,8 @@ define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (ang
         // route
         $stateProvider
         
+            //https://github.com/angular-ui/ui-router/wiki
+            //官方文档
             // home
             .state("home", angularAMD.route({
                 url: "/home",
@@ -25,11 +27,28 @@ define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (ang
             }))
 			
 			// home
-            .state("about", angularAMD.route({
-                url: "/about/{aboutid}",
-                templateUrl: "../modules/base/about.html",
-                controllerUrl: "../modules/base/about.js"
-            }))
+            .state("about", {
+            url: "/about/{aboutid}",
+            views:{
+                "":angularAMD.route({
+                        //templateUrl: "../modules/base/about.html",
+                        templateProvider: function ($timeout, $stateParams) {
+                            return $timeout(function () {
+                              return '<h1>' + $stateParams.aboutid + '</h1>'
+                            }, 100);
+                        },
+                        controllerUrl: "../modules/base/about.js",
+                        onEnter: function(){
+                            console.info("onEnter:");
+                        },
+                        onExit: function(){
+                            console.info("onExit:");
+                        }
+                    }),
+                "filters":angularAMD.route({
+                    template:"第2个view的内容~"
+                })
+            }})
         
             //service
             .state("service", angularAMD.route({
