@@ -10,6 +10,7 @@
     <title></title>
 
     <link rel='stylesheet' href="bower_components/bootstrap/css/bootstrap.css">
+    <link rel='stylesheet' href="index.css">
 </head>
 
 <body>
@@ -32,6 +33,7 @@
                             <li><a href="#/controller">controller</a></li>
                             <li><a href="#/filter">filter</a></li>
                             <li><a href="#/directive">directive</a></li>
+                            <li><a href="#/modal">modal</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -45,6 +47,8 @@
         <div class="row" ui-view="filters"></div>
     </div>
 
+    <div ui-view="modal"></div>
+    
     <!-- script -->
     <script src="bower_components/jquery-1.12.3.js"></script>
     <script data-main="main.js" src="bower_components/requirejs/require.js"></script>

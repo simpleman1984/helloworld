@@ -9,6 +9,7 @@ define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (ang
         
         // route
         $stateProvider
+            .state("Default", {})
         
             //https://github.com/angular-ui/ui-router/wiki
             //官方文档
@@ -77,6 +78,44 @@ define(["angular", "angularAMD","bootstrap", "angular-ui-router"], function (ang
                 templateUrl: "../modules/base/directive.html",
                 controllerUrl: "../modules/base/directive.js"
             }))
+        
+        
+        
+            //modal,弹出对话框设置
+            .state("Modal", angularAMD.route({
+                views:{
+                    "modal":{
+                        templateUrl: "../modules/modal/index.html",
+                        controllerUrl: "../modules/modal/index.js",
+                        onEnter: ["$state", function($state) {
+                            $(document).on("keyup", function(e) {
+                                if(e.keyCode == 27) {
+                                  $(document).off("keyup");
+                                  $state.go("Default");
+                                }
+                            });
+
+                            $(document).on("click", ".Modal-backdrop, .Modal-holder", function() {
+                                $state.go("Default");
+                            });
+
+                            $(document).on("click", ".Modal-box, .Modal-box *", function(e) {
+                                e.stopPropagation();
+                            });
+                        }],
+                        abstract: true
+                    }
+                }
+            }))
+        
+            .state("Modal.confirmAddToCart", {
+                url: "/modal",
+                views:{
+                    "modal":{
+                        templateUrl: "../modules/modal/confirm.html"
+                    }
+                }
+            });
         ;   		
     };        
         
