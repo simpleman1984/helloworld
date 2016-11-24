@@ -1,0 +1,191 @@
+<section class="content-header">
+    <h4>
+        用能情况
+        <small>统计</small>
+    </h4>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active">实时监控</li>
+    </ol>
+</section>
+<section class="content">
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-lightbulb-o "></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">照明与插座</span>
+                <span class="info-box-number">3685<small>kwh</small></span>
+                <span class="info-box-description tongbi">昨日同期比14% <i class="fa fa-level-up text-green"> </i></span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-bolt"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">空调用电</span>
+                <span class="info-box-number">3685<small>kwh</small></span>
+                <span class="info-box-description tongbi">昨日同期比14% <i class="fa fa-level-down text-red"> </i></span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="fa fa-cog"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">动力用电</span>
+                <span class="info-box-number">3685<small>kwh</small></span>
+                <span class="info-box-description tongbi">昨日同期比14% <i class="fa fa-level-down text-red"></i></span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-list"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">其他用电</span>
+                <span class="info-box-number">3685<small>kwh</small></span>
+                <span class="info-box-description tongbi">昨日同期比14% <i class="fa fa-level-up text-yellow"> </i></span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+    <div class="box-body">
+        <form role="form" class="form-inline">
+            <div class="form-group distas">
+                <label class="fots">部位</label>
+                <input type="" placeholder="请输入部位"  class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="fots">时间</label>
+                <daterangepicker ></daterangepicker>
+            </div>
+            <button class="btn btn-primary" type="submit">查询</button>
+        </form>
+    </div>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <i class="fa fa-bar-chart-o"></i>
+            <h3 class="box-title">分项能耗</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="chart1" style="height:300px; width:1400px; margin:0 auto;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">能耗定额</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="chart2" style="height:300px;"></div>
+                </div>
+            </div>
+            </div>
+        <div class="col-sm-8">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">分类能耗</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="chart3" style="height:300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">明细</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="chart4" style="height:331px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">统计</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="progress-group">
+                        <span class="info-box-text">最大值</span>
+                        <span class="progress-text">3564</span>
+                        <span class="progress-number">20% <i class="fa fa-level-up text-green"></i></span>
+                        <div class="progress sm">
+                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <span class="info-box-text">最小值</span>
+                    <span class="info-box-number">2346</span>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-red" style="width: 30%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                        </div>
+                    </div>
+                    <span class="info-box-text">平均值</span>
+                    <span class="info-box-number">2346</span>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-yellow" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                        </div>
+                    </div>
+                    <span class="info-box-text">总值</span>
+                    <span class="info-box-number">2346</span>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-aqua" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

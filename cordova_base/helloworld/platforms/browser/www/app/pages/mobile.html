@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>金坤节能监管平台|手机站</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/app/ext/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/app/ext/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <!-- 自定义页面样式 -->
+    <link href="/dist/css/mobile.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="container-fluid no-padding" ui-view></div>
+    {{menus.items}}
+    <div class="navs" ng-controller="navCtrl">
+        <ul>
+            <li ng-repeat="item in menus.items"><a ng-href="{{item.url}}"><i class="fa fa-bar-chart"></i><br>{{item.name}}</a></li>
+            <div class="c1"></div>
+        </ul>
+    </div>
+<script data-main="mobile.js" src="/app/ext/libs/requirejs/require.js"></script>
+<!-- jQuery 2.2.3 -->
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App-->
+<script src="../../dist/js/app.js"></script>
+</body>
+</html>

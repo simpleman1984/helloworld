@@ -1,0 +1,62 @@
+<div class="row no-margin jzinfo">
+<form role="form" class="form-inline choices">
+            <div class="form-group">
+                <label >时间</label>
+                <daterangepicker ></daterangepicker>
+            </div>
+            <div class="form-group">
+                <label>建筑选择</label>
+                <select class="form-control">
+                    <option selected="selected">建筑区域</option>
+                    <option>建筑分类</option>
+                    <option>建筑状态</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label >分析指标</label>
+                <select class="form-control">
+                    <option selected="selected">面均能耗</option>
+                    <option>人均能耗</option>
+                    <option>总能耗</option>
+                    <option>水</option>
+                    <option>电</option>
+                    <option>煤气</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">查询</button>
+        </form>
+    <div class="row no-margin jzinfo">
+        <div class="col-sm-4">
+            <dl class="dl-horizontal">
+                <dt>在线建筑总面积</dt>
+                <dd class="text-info">135642 m2</dd>
+                <dt>总能耗量</dt>
+                <dd class="text-info">4340tce</dd>
+                <dt>单位面积平均能耗量</dt>
+                <dd class="text-info">32kgce/m2</dd>
+                <dt>单位面积最高能耗量</dt>
+                <dd class="text-info">45.5kgce/m2</dd>
+                <dt>单位面积最低能耗量</dt>
+                <dd class="text-info">28.33kgce/m2</dd>
+            </dl>
+        </div>
+        <div class="col-sm-2">
+            <dl class="dl-horizontal">
+                <dt>超平均值建筑数</dt>
+                <dd class="text-info">5</dd>
+                <dt>低于平均值建筑数</dt>
+                <dd class="text-info">6</dd>
+                <dt>超限额建筑数</dt>
+                <dd class="text-info">5</dd>
+                <dt>在线建筑数</dt>
+                <dd class="text-info">3</dd>
+                <div class="btn btn-primary btn-block">详细信息</div>
+            </dl>
+        </div>
+    </div>
+    <div class="row no-margin jzinfo">
+        <div id="main" style="width:100%;height:400px;"></div>
+    </div>
+
+</div>
+

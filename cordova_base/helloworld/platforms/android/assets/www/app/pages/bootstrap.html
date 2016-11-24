@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <!-- title -->
+    <title></title>
+
+</head>
+<body >
+<div ng-app1="app">
+    <div ng-controller="TestCtrl">{{demo}}</div>
+</div>
+<script src="/plugins/jQuery/jquery-2.0.3.js"></script>
+<script src="/app/ext/libs/angularjs/angular.js"></script>
+<script src="/app/ext/libs/angular-ui-router/angular-ui-router.js"></script>
+<script>
+    var myApp = angular.module('app', []);
+    myApp.controller('TestCtrl', function ($scope) {
+        $scope.demo = "1111111111";
+    });
+
+    myApp.controller('TestCtrl1', function ($scope) {
+        $scope.demo = "222233333333333333333333333333333333333333333322222";
+    });
+
+
+    //动态添加html
+    var element = $("<div ng-controller='TestCtrl1'>{{demo}}</div>").appendTo($('[ng-app1="app"]'));//($("body"));
+    var $injector = angular.injector(['ng', 'app']);
+    $injector.invoke(function($rootScope, $compile) {
+        $compile(element)($rootScope);
+    });
+
+    angular.bootstrap(document, ['app']);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<div class="box box-solid">
+    <div class="box-header">
+        <form role="form" class="form-inline choices">
+            <div class="form-group">
+                <label >时间</label>
+                <daterangepicker ></daterangepicker>
+            </div>
+            <div class="form-group">
+                <label>指标</label>
+                <select class="form-control">
+                    <option selected="selected">总能耗</option>
+                    <option>面均能耗</option>
+                    <option>人均能耗</option>
+                    <option>水</option>
+                    <option>电</option>
+                </select>
+            </div>
+            <div class="btn-group form-group">
+                <button type="button" class="btn btn-default">排序</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">升序</a></li>
+                    <li><a href="#">降序</a></li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label >建筑分类</label>
+                <select class="form-control">
+                    <option selected="selected">分类1</option>
+                    <option>分类2</option>
+                    <option>分类3</option>
+                    <option>分类4</option>
+                    <option>分类5</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">查询</button>
+        </form>
+    </div>
+    <div class="box-body">
+        <div class="sec1">
+        <h3 class="tits">建筑分类</h3>
+        <div class="gundong clearfix">
+            <div class="blk_18">
+                <a class="LeftBotton" onmousedown="ISL_GoUp_1()" onmouseup="ISL_StopUp_1()" onmouseout="ISL_StopUp_1()" href="javascript:void(0);" target="_self"><i class="fa fa-angle-left"></i></a>
+                <div class="pcont" id="ISL_Cont_1">
+                    <div class="ScrCont">
+                        <div id="List1_1">
+                            <a ng-repeat="build in builds" class="pl" ng-click="showModal(build.id)"><span title="" class="badge bg-red">{{build.num}}</span><img src='{{build.img}}' width="180" height="120" /><p>{{build.name}}</p><h4>{{build.label}}</h4></a>
+                        </div>
+                        <div id="List2_1"></div>
+                        <div class="c1"></div>
+                    </div>
+                </div>
+                <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self"><i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+

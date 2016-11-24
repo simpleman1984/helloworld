@@ -1,0 +1,76 @@
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <i class="fa fa-bar-chart-o"></i>
+        <h3 class="box-title">数据分析</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="form-group clearfix">
+            <label class="col-xs-1 control-label text-right"> 对比类型 </label>
+            <div class="col-xs-3 compares">
+                <label>
+                    <icheck></icheck>
+                    <span>建筑对比</span>
+                </label>
+                <label>
+                    <icheck></icheck>
+                    <span>时间对比</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-xs-1 control-label text-right"> 时间 </label>
+            <div class="col-xs-2 input-group date">
+                <daterangepicker ></daterangepicker>
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-xs-1 control-label text-right"> 部位 </label>
+            <div class="col-xs-2 input-group date">
+                <input type="text" class="form-control pull-right">
+                <div class="input-group-addon" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-caret-down"></i>
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">请选择部位</h4>
+                            </div>
+                            <div class="modal-body">
+                                <jstree></jstree>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">确定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-xs-1 control-label text-right">能耗类型</label>
+            <div class="col-xs-2 input-group date">
+                <input type="text" class="form-control pull-right">
+                <div class="input-group-addon">
+                    <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <div class="col-sm-offset-1 col-sm-2">
+                <button class="btn btn-block btn-primary" type="submit">查 询</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+<section class="content-header">
+    <h4>能耗诊断</h4>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active">能耗诊断</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box-body">
+        <form class="form-inline">
+                <div class="form-group distas">
+                <label class="fots">时间</label>
+                <input type="datetime" class="form-control">
+                </div>
+                <div class="form-group distas">
+                    <label class="fots">能耗部位</label>
+                    <input type="datetime" class="form-control">
+
+                </div>
+                <div class="form-group distas">
+                    <label class="fots">能耗类型</label>
+                    <input type="datetime" class="form-control">
+                </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">云湖国际会议中心</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="minxi" style="height:286px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">统计</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="progress-group">
+                        <span class="info-box-text">最大值</span>
+                        <span class="progress-text">3564</span>
+                        <span class="progress-number">20% <i class="fa fa-level-up text-green"></i></span>
+                        <div class="progress sm">
+                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <span class="info-box-text">最小值</span>
+                    <span class="info-box-number">2346</span>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-red" style="width: 30%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                        </div>
+                    </div>
+                    <span class="info-box-text">平均值</span>
+                    <span class="info-box-number">2346</span>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-yellow" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                        </div>
+                    </div>
+                    <span class="info-box-text">总值</span>
+                    <span class="info-box-number">2346</span>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-aqua" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+<script src="/app/ext/libs/angular-ui-router/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+                              // 基于准备好的dom，初始化echarts图表
+                var myChart = echarts.init(document.getElementById('total'));
+                var option = {
+                    title : {
+                        text: '未来一周气温变化',
+                        subtext: '纯属虚构'
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['最高气温','最低气温']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : ['周一','周二','周三','周四','周五','周六','周日']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            axisLabel : {
+                                formatter: '{value} °C'
+                            }
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'最高气温',
+                            type:'line',
+                            data:[11, 11, 15, 13, 12, 13, 10],
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'最低气温',
+                            type:'line',
+                            data:[1, -2, 2, 5, 3, 2, 0],
+                            markPoint : {
+                                data : [
+                                    {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name : '平均值'}
+                                ]
+                            }
+                        }
+                    ]
+                };
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+                              // 基于准备好的dom，初始化echarts图表
+                              var myChart = echarts.init(document.getElementById('fenxiang'));
+                              var option = {
+                                  title : {
+                                      text: '未来一周气温变化',
+                                      subtext: '纯属虚构'
+                                  },
+                                  tooltip : {
+                                      trigger: 'axis'
+                                  },
+                                  legend: {
+                                      data:['最高气温','最低气温']
+                                  },
+                                  toolbox: {
+                                      show : true,
+                                      feature : {
+                                          mark : {show: true},
+                                          dataView : {show: true, readOnly: false},
+                                          magicType : {show: true, type: ['line', 'bar']},
+                                          restore : {show: true},
+                                          saveAsImage : {show: true}
+                                      }
+                                  },
+                                  calculable : true,
+                                  xAxis : [
+                                      {
+                                          type : 'category',
+                                          boundaryGap : false,
+                                          data : ['周一','周二','周三','周四','周五','周六','周日']
+                                      }
+                                  ],
+                                  yAxis : [
+                                      {
+                                          type : 'value',
+                                          axisLabel : {
+                                              formatter: '{value} °C'
+                                          }
+                                      }
+                                  ],
+                                  series : [
+                                      {
+                                          name:'最高气温',
+                                          type:'line',
+                                          data:[11, 11, 15, 13, 12, 13, 10],
+                                          markPoint : {
+                                              data : [
+                                                  {type : 'max', name: '最大值'},
+                                                  {type : 'min', name: '最小值'}
+                                              ]
+                                          },
+                                          markLine : {
+                                              data : [
+                                                  {type : 'average', name: '平均值'}
+                                              ]
+                                          }
+                                      },
+                                      {
+                                          name:'最低气温',
+                                          type:'line',
+                                          data:[1, -2, 2, 5, 3, 2, 0],
+                                          markPoint : {
+                                              data : [
+                                                  {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+                                              ]
+                                          },
+                                          markLine : {
+                                              data : [
+                                                  {type : 'average', name : '平均值'}
+                                              ]
+                                          }
+                                      }
+                                  ]
+                              };
+                              // 为echarts对象加载数据
+                              myChart.setOption(option);
+
+
+</script>

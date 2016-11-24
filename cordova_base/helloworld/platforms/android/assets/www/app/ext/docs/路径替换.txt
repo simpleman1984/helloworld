@@ -1,0 +1,24 @@
+https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css
+/app/ext/libs/font-awesome/4.6.3/css/font-awesome.min.css
+
+
+https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css
+/app/ext/libs/ionicons/2.0.1/css/ionicons.min.css
+
+https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js
+/app/ext/libs/html5shiv/3.7.3/html5shiv.min.js
+
+https://oss.maxcdn.com/respond/1.4.2/respond.min.js
+/app/ext/libs/respond/1.4.2/respond.min.js
+
+https://code.jquery.com/ui/1.11.4/jquery-ui.min.js
+/plugins/jQueryUI/jquery-ui.min.js
+
+https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js
+/app/ext/libs/raphael/2.2.1/raphael.min.js
+
+https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js
+/app/ext/libs/moment/moment.js
+
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic)

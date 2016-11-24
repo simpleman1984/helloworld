@@ -21,7 +21,8 @@ apply plugin: 'com.android.application'
 
 buildscript {
     repositories {
-        mavenCentral()
+		//mavenCentral()
+        maven{ url 'http://maven.aliyun.com/nexus/content/repositories/central/'}
         jcenter()
     }
 
@@ -37,7 +38,8 @@ buildscript {
 // Allow plugins to declare Maven dependencies via build-extras.gradle.
 allprojects {
     repositories {
-        mavenCentral();
+		maven{ url 'http://maven.aliyun.com/nexus/content/repositories/central/'}
+        //mavenCentral();
         jcenter()
     }
 }

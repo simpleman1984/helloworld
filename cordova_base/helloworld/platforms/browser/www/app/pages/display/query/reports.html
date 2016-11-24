@@ -1,0 +1,201 @@
+<!-- iCheck 1.0.1 -->
+<script src="/plugins/iCheck/icheck.min.js"></script>
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="/plugins/iCheck/all.css">
+<section class="content-header">
+    <h4>能耗报表</h4>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active">能耗报表</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <i class="fa fa-bar-chart-o"></i>
+            <h3 class="box-title">报表</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="form-group clearfix">
+                <label class="col-sm-3 control-label text-right"> 报表类型 </label>
+                <div class="col-sm-9 compares">
+                    <label>
+                        <icheck></icheck>
+                        <span>固定报表</span>
+                    </label>
+                    <label>
+                        <icheck></icheck>
+                        <span>部位报表</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-sm-3 control-label text-right"> 时间 </label>
+                <div class="col-sm-2 input-group date">
+                    <daterangepicker ></daterangepicker>
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-sm-3 control-label text-right"> 部位 </label>
+                <div class="col-sm-2 input-group date">
+                    <input type="text" class="form-control pull-right">
+                    <div class="input-group-addon">
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-sm-3 control-label text-right">报表类型</label>
+                <div class="col-sm-2 input-group date">
+                    <input type="text" class="form-control pull-right">
+                    <div class="input-group-addon">
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <p><button class="btn btn-info" type="submit">查 询</button>
+                    <button class="btn btn-primary btn-danger" type="submit">导出报表</button></p>
+                </div>
+            </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">对比分析</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="chart9" style="height:286px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">用电量对比分析</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>本期电量(kwh)</th>
+                        <th>上月同期电量(kwh)</th>
+                        <th>去年同期电量(kwh)</th>
+                        <th>环比(%)</th>
+                        <th>同比(%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>2016-9-10</td>
+                        <td>5078</td>
+                        <td>6874</td>
+                        <td>987</td>
+                        <td>5%</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td>2016-9-10</td>
+                        <td>5078</td>
+                        <td>6874</td>
+                        <td>987</td>
+                        <td>5%</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td>2016-9-10</td>
+                        <td>5078</td>
+                        <td>6874</td>
+                        <td>987</td>
+                        <td>5%</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td>2016-9-10</td>
+                        <td>5078</td>
+                        <td>6874</td>
+                        <td>987</td>
+                        <td>5%</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td>2016-9-10</td>
+                        <td>5078</td>
+                        <td>6874</td>
+                        <td>987</td>
+                        <td>5%</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td>2016-9-10</td>
+                        <td>5078</td>
+                        <td>6874</td>
+                        <td>987</td>
+                        <td>5%</td>
+                        <td>55%</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>总计</th>
+                        <th>81734</th>
+                        <th>6548</th>
+                        <th>98989</th>
+                        <th>58%</th>
+                        <th>62%</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        </div>
+    </div>
+</section>
+<script>
+//checkbox and radio style
+    $(function () {
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue'
+        });
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red'
+        });
+        //Flat red color scheme for iCheck
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+       });
+</script>
+
+
+
+
+
+

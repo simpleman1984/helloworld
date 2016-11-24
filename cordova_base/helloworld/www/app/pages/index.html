@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/app/ext/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/app/ext/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- index add css -->
+  <link rel="stylesheet" href="/app/pages/css/index.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+  <!-- 自定义页面样式 -->
+  <link rel="stylesheet" href="../../dist/css/custom.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <![endif]-->
+</head>
+<body class="skin-green sidebar-mini">
+<div class="wrapper">
+  <header class="main-header" >
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b><img src="/app/pages/imgs/logo2.png" width="46" height="39" border="0" alt=""></b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b><img src="/app/pages/imgs/logo.png" width="174" height="45" border="0" alt=""></b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">你有 4 消息</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li ng-repeat="msg in msgList"><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle"
+                             alt="User Image">
+                      </div>
+                      <h4>
+                        {{msg.title}}}
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <p>{{msg.content}}}</p>
+                    </a>
+                  </li>
+                  <!-- end message -->
+                </ul>
+              </li>
+              <li class="footer"><a href="#">查看所有消息</a></li>
+            </ul>
+          </li>
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">你有 10 警告</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">查看所有警告</a></li>
+            </ul>
+          </li>
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">Alexander Pierce</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  {{buildName}}
+                  <small>Member since Nov. 2012</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                  </div>
+                </div>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">注销</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>能耗监控</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href=""><i class="fa fa-circle-o"></i> 实时监控</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>能耗查询</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>对比分析</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>能耗报表</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>数据分析</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-circle-o"></i> 能耗诊断</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> 表计读数</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> 拆分分析</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>仪表参数分析</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>原始XML分析</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>大型设备</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> 空调监控</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>集团功能</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-circle-o"></i> 地图</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> 建筑汇总</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> 建筑排名</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>系统维护</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-circle-o"></i> 建筑管理</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> 建筑部位维护</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> 建筑采集器维护</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>监测仪表产品维护</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>采集器监测仪表维护</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>分类分项能耗编码</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>建筑分类分项能耗</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>建筑能耗分时单价</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>部位拓扑关系</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>首页指标维护</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>自助界面配置</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>空调监测配置</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>冷热量仪充值页面</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>用户权限配置</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.7
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="#">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+<!-- jQuery 2.2.3 -->
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../ext/libs/angular-ui-router/echarts/echarts.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App-->
+<script src="../../dist/js/app.min.js"></script>
+</body>
+</html>

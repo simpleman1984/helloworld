@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>金坤节能监管平台|地图</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/app/ext/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/app/ext/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <!-- 自定义页面样式 -->
+    <link rel="stylesheet" href="/dist/css/custom.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins. -->
+    <link rel="stylesheet" href="/dist/css/skins/_all-skins.css">
+    <!-- dsterangepicker css样式表 -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css"/>
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="/plugins/iCheck/all.css">
+    <!-- jstree 树型图style -->
+    <link rel="stylesheet" href="/plugins/jstree/style.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/plugins/select2/select2.min.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- 地图页面样式 -->
+    <link rel="stylesheet" href="/app/ext/libs/openlayers/ol.css"/>
+</head>
+<body class="skin-black sidebar-mini fixed sidebar-collapse" ng-controller="leftCtl">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b><img src="/app/pages/imgs/logo2.png" width="46" height="39" border="0" alt=""></b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b><img src="/app/pages/imgs/logo.png" width="174" height="45" border="0" alt=""></b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" >
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li class="dropdown selects">
+                        <div class="form-group">
+                            <select class="form-control select2" style="width: 200px;">
+                                <optgroup ng-repeat="area in builds" label="{{area.template}}">
+                                <option ng-repeat="item in area.build">
+                                    {{item.name}}
+                                </option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </li>
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">你有如下消息</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <a  ng-click="showModal('ALARM')">
+                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-user text-red"></i> You changed your username
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a ng-click="showModal('INFO')">View all</a></li>
+                        </ul>
+                    </li>
+
+                    <!--<li class="dropdown messages-menu">
+                        <a ng-click="showModal('INFO')">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">4</span>
+                        </a>
+                    </li>
+                    &lt;!&ndash; Notifications: style can be found in dropdown.less &ndash;&gt;
+                    <li class="notifications-menu">
+                        <a ng-click="showModal('ALARM')">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                    </li>-->
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs">管理员</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <p>
+                                    {{buildName}}
+                                    <small>这里是详细描述部分。</small>
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">关注</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Sales</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">加好友</a>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">设置</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">注销</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar navbar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar ditus">
+            <ul class="treeview-menu">
+                <li ng-click="showModal('SORT')"><i class="fa fa-bar-chart"></i><br>建筑排名</li>
+                <li ng-click="showModal('ANASYS')"><i class="fa fa-bar-chart"></i><br>能耗分析</li>
+                <li ng-click="showModal('PUBLISH')"><i class="fa fa-bar-chart"></i><br>信息发布</li>
+                <div class="c1"></div>
+            </ul>
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" ui-view></div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 4.0
+        </div>
+        <strong>Copyright &copy; 2014-2016 <a href="">金坤节能</a>.</strong> All rights reserved.
+    </footer>
+</div>
+<!-- ./wrapper -->
+<!-- script-->
+
+<!-- jQuery 2.2.3 -->
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+<script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+<!-- AdminLTE App-->
+<script src="../../dist/js/app.js"></script>
+
+
+<script data-main="ditu.js" src="/app/ext/libs/requirejs/require.js"></script>
+
+
+<script src="../../plugins/scroll/scroll.js"></script>
+
+<script>
+    $(function () {
+        $("#compose-textarea").wysihtml5();
+    });
+</script>
+</body>
+</html>
