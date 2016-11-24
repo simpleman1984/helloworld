@@ -287,7 +287,14 @@ public class XWalkWebViewEngine implements CordovaWebViewEngine {
     @Override
     public String getUrl() {
         if (!activityDelegate.isXWalkReady()) return null;
-        return this.webView.getUrl();
+        String url =  this.webView.getUrl();
+		Log.i(TAG, "========               getUrlgetUrl: " + url);
+		if(url.startsWith("/")){
+			return "/android_asset/www/"+url;
+		}else
+		{
+			return url;
+		}
     }
 
     @Override

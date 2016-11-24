@@ -244,6 +244,7 @@ public class CordovaResourceApi {
         if (!skipThreadCheck) {
             assertBackgroundThread();
         }
+		System.out.println("openForRead------" + uri);
         switch (getUriType(uri)) {
             case URI_TYPE_FILE: {
                 FileInputStream inputStream = new FileInputStream(uri.getPath());

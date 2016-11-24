@@ -79,6 +79,7 @@ public class XWalkCordovaResourceClient extends XWalkResourceClient {
             // Allow plugins to intercept WebView requests.
             Uri remappedUri = resourceApi.remapUri(origUri);
 
+			System.out.println("openForRead------" + uri);
             if (!origUri.equals(remappedUri)) {
                 OpenForReadResult result = resourceApi.openForRead(remappedUri, true);
                 return new WebResourceResponse(result.mimeType, "UTF-8", result.inputStream);
