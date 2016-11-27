@@ -1,3 +1,6 @@
 // GENERATED FILE - DO NOT EDIT
 include ":"
 include ":CordovaLib"
+//添加子项目
+include ":org.eclipse.paho.android.service"
+project(':org.eclipse.paho.android.service').projectDir = new File('org.eclipse.paho.android.service')

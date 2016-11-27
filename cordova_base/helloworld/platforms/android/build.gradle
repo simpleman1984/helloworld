@@ -87,6 +87,20 @@ ext {
 
     // Plugin gradle extensions can append to this to have code run at the end.
     cdvPluginPostBuildExtras = []
+
+    //根据mqtt协议的需要，添加如下的变量定义
+    compileSdkVersion = 23
+    buildToolsVersion = '23.0.2'
+
+    group = 'org.eclipse.paho'
+
+    serviceArchivesBaseName = 'org.eclipse.paho.android.service'
+    serviceVersion = '1.1.0'
+
+    clientVersion = '1.1.0'
+    mavenUrl = "https://repo.eclipse.org/content/repositories/paho-releases/"
+
+    supportLibVersion = '23.3.0'
 }
 
 // PLUGIN GRADLE EXTENSIONS START
@@ -287,6 +301,8 @@ dependencies {
     debugCompile(project(path: "CordovaLib", configuration: "debug"))
     releaseCompile(project(path: "CordovaLib", configuration: "release"))
     // SUB-PROJECT DEPENDENCIES END
+    //加入mqttservice相关的依赖
+    compile (project(path: "org.eclipse.paho.android.service"))
 }
 
 def promptForReleaseKeyPassword() {
