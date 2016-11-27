@@ -244,11 +244,12 @@ public class CordovaResourceApi {
         if (!skipThreadCheck) {
             assertBackgroundThread();
         }
-		System.out.println("openForRead------" + uri);
+		System.out.println("openForRead------" + uri+"--------"+getUriType(uri));
         switch (getUriType(uri)) {
             case URI_TYPE_FILE: {
-                FileInputStream inputStream = new FileInputStream(uri.getPath());
-                String mimeType = getMimeTypeFromPath(uri.getPath());
+                String path = uri.getPath();
+                FileInputStream inputStream = new FileInputStream(path);
+                String mimeType = getMimeTypeFromPath(path);
                 long length = inputStream.getChannel().size();
                 return new OpenForReadResult(uri, inputStream, mimeType, length, null);
             }

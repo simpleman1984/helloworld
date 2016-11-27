@@ -25,7 +25,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.2.2'
     }
 
 }
@@ -46,6 +46,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_6
         targetCompatibility JavaVersion.VERSION_1_6
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
     sourceSets {

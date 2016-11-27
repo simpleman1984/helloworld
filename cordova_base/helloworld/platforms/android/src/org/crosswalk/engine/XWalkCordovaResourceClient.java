@@ -79,13 +79,23 @@ public class XWalkCordovaResourceClient extends XWalkResourceClient {
             // Allow plugins to intercept WebView requests.
             Uri remappedUri = resourceApi.remapUri(origUri);
 
-			System.out.println("openForRead------" + remappedUri);
+            //如果当前目录，不是从assets中读取，则强制修改为从assets中读取；
+            //最合理的改法，应该放到上面的remapUri方法中，以后再修改吧。
+            String remapperUrl = remappedUri.getPath();
+            if (!remapperUrl.startsWith("/android_asset/")) {
+                remapperUrl = "file:///android_asset/www" + remapperUrl;
+            }
+            remappedUri = Uri.parse(remapperUrl);
+
+            System.out.println(origUri+"---shouldInterceptLoadRequest------" + remappedUri);
             if (!origUri.equals(remappedUri)) {
                 OpenForReadResult result = resourceApi.openForRead(remappedUri, true);
                 return new WebResourceResponse(result.mimeType, "UTF-8", result.inputStream);
             }
+
             // If we don't need to special-case the request, let the browser load it.
             return null;
+
         } catch (IOException e) {
             if (!(e instanceof FileNotFoundException)) {
                 LOG.e(TAG, "Error occurred while loading a file (returning a 404).", e);

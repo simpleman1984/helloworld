@@ -194,8 +194,8 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Fri Nov 25 10:10:38 CST 2016.<br/>
-1 errors and 10 warnings found:<br/><br/>
+Check performed at Sun Nov 27 00:00:03 CST 2016.<br/>
+1 errors and 9 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
@@ -214,10 +214,6 @@ Check performed at Fri Nov 25 10:10:38 CST 2016.<br/>
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" width="16" height="15" alt="Warning" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAQAAABHeoekAAAA3klEQVR42nWPsWoCQRCGVyJiF9tAsNImbcDKR/ABBEurYCsBsfQRQiAPYGPyAAnYWQULS9MErNU2Vsr/ObMX7g6O+xd2/5n5dmY3hFQEBVVpuCsVT/yoUl6u4XotBz4E4qR2YYyH6ugEWY8comR/t+tvPPJtSLPYvhvvTswtbdCmCOwjMHXAzjP9kB/ByB7nejbgy43WVPF3WNG+p9+kzkozdhGAQdZh7BlHdGTL3z98pp6Um7okKdvHNuIzWk+9xN+yINOcHps0OnAfuOOoHJH3pmHghhYP2VJcaXx7BaKz9YB2HVrDAAAAAElFTkSuQmCC"/>
 <a href="#Registered">Registered: Class is not registered in the manifest</a>
-</td></tr>
-<tr>
-<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" width="16" height="15" alt="Warning" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAQAAABHeoekAAAA3klEQVR42nWPsWoCQRCGVyJiF9tAsNImbcDKR/ABBEurYCsBsfQRQiAPYGPyAAnYWQULS9MErNU2Vsr/ObMX7g6O+xd2/5n5dmY3hFQEBVVpuCsVT/yoUl6u4XotBz4E4qR2YYyH6ugEWY8comR/t+tvPPJtSLPYvhvvTswtbdCmCOwjMHXAzjP9kB/ByB7nejbgy43WVPF3WNG+p9+kzkozdhGAQdZh7BlHdGTL3z98pp6Um7okKdvHNuIzWk+9xN+yINOcHps0OnAfuOOoHJH3pmHghhYP2VJcaXx7BaKz9YB2HVrDAAAAAElFTkSuQmCC"/>
-<a href="#GradleDependency">GradleDependency: Obsolete Gradle Dependency</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#Security">Security</a>
 </td></tr>
@@ -244,7 +240,7 @@ Check performed at Fri Nov 25 10:10:38 CST 2016.<br/>
 <span class="lineno"> 109</span>         }
 <span class="lineno"> 110</span>         engine.init(this, cordova, engineClient, resourceApi, pluginManager, nativeToJsMessageQueue);
 <span class="lineno"> 111</span>         // This isn't enforced by the compiler, so assert here.
-<span class="lineno"> 112</span>         <span class="errorspan">assert engine.getView() instanceof CordovaWebViewEngine.EngineView;</span>
+<span class="lineno"> 112</span>         <span class="errorspan">assert engine.getView() instanceof CordovaWebViewEngine.EngineView;</span>
 <span class="lineno"> 113</span> 
 <span class="lineno"> 114</span>         pluginManager.addService(CoreAndroid.PLUGIN_NAME, "org.apache.cordova.CoreAndroid");
 </pre>
@@ -272,7 +268,7 @@ For example, you can replace <code>assert speed > 0</code> with <code>if (BuildC
 <span class="lineno"> 323</span>     public void onWindowFocusChanged(boolean hasFocus) {
 <span class="lineno"> 324</span>         super.onWindowFocusChanged(hasFocus);
 <span class="lineno"> 325</span>         if (hasFocus &amp;&amp; immersiveMode) {
-<span class="lineno"> 326</span>             final int uiOptions = <span class="errorspan">View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span>
+<span class="lineno"> 326</span>             final int uiOptions = <span class="errorspan">View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span>
 <span class="lineno"> 327</span>                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 <span class="lineno"> 328</span>                     | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 </pre>
@@ -280,7 +276,7 @@ For example, you can replace <code>assert speed > 0</code> with <code>if (BuildC
 <span class="lineno"> 324</span>         super.onWindowFocusChanged(hasFocus);
 <span class="lineno"> 325</span>         if (hasFocus &amp;&amp; immersiveMode) {
 <span class="lineno"> 326</span>             final int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-<span class="lineno"> 327</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</span>
+<span class="lineno"> 327</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</span>
 <span class="lineno"> 328</span>                     | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 <span class="lineno"> 329</span>                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 </pre>
@@ -288,7 +284,7 @@ For example, you can replace <code>assert speed > 0</code> with <code>if (BuildC
 <span class="lineno"> 325</span>         if (hasFocus &amp;&amp; immersiveMode) {
 <span class="lineno"> 326</span>             final int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 <span class="lineno"> 327</span>                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-<span class="lineno"> 328</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span>
+<span class="lineno"> 328</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span>
 <span class="lineno"> 329</span>                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 <span class="lineno"> 330</span>                     | View.SYSTEM_UI_FLAG_FULLSCREEN
 </pre>
@@ -296,7 +292,7 @@ For example, you can replace <code>assert speed > 0</code> with <code>if (BuildC
 <span class="lineno"> 327</span>                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 <span class="lineno"> 328</span>                     | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 <span class="lineno"> 329</span>                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-<span class="lineno"> 330</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_FULLSCREEN</span>
+<span class="lineno"> 330</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_FULLSCREEN</span>
 <span class="lineno"> 331</span>                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 <span class="lineno"> 332</span> 
 </pre>
@@ -304,7 +300,7 @@ For example, you can replace <code>assert speed > 0</code> with <code>if (BuildC
 <span class="lineno"> 328</span>                     | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 <span class="lineno"> 329</span>                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 <span class="lineno"> 330</span>                     | View.SYSTEM_UI_FLAG_FULLSCREEN
-<span class="lineno"> 331</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;</span>
+<span class="lineno"> 331</span>                     | <span class="errorspan">View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;</span>
 <span class="lineno"> 332</span> 
 <span class="lineno"> 333</span>             getWindow().getDecorView().setSystemUiVisibility(uiOptions);
 </pre>
@@ -332,7 +328,7 @@ If your code is <b>deliberately</b> accessing newer APIs, and you have ensured (
 <span class="lineno"> 223</span> 
 <span class="lineno"> 224</span>     public void requestPermissions(CordovaPlugin plugin, int requestCode, String [] permissions) {
 <span class="lineno"> 225</span>         int mappedRequestCode = permissionResultCallbacks.registerCallback(plugin, requestCode);
-<span class="lineno"> 226</span>         getActivity().<span class="errorspan">requestPermissions(permissions, mappedRequestCode);</span>
+<span class="lineno"> 226</span>         getActivity().<span class="errorspan">requestPermissions(permissions, mappedRequestCode);</span>
 <span class="lineno"> 227</span>     }
 <span class="lineno"> 228</span> 
 </pre>
@@ -364,7 +360,7 @@ Similarly, you can use tools:targetApi="11" in an XML file to indicate that the 
 <span class="lineno">  74</span>  * deprecated in favor of the config.xml file.
 <span class="lineno">  75</span>  *
 <span class="lineno">  76</span>  */
-<span class="lineno">  77</span> public class <span class="errorspan">CordovaActivity extends Activity {</span>
+<span class="lineno">  77</span> public class <span class="errorspan">CordovaActivity extends Activity {</span>
 <span class="lineno">  78</span>     public static String TAG = "CordovaActivity";
 <span class="lineno">  79</span> 
 </pre>
@@ -381,30 +377,6 @@ If your activity is simply a parent class intended to be subclassed by other "re
 <br/><div class="moreinfo">More info: <a href="http://developer.android.com/guide/topics/manifest/manifest-intro.html">http://developer.android.com/guide/topics/manifest/manifest-intro.html</a>
 </div><br/>To suppress this error, use the issue id "Registered" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
-<a name="GradleDependency"></a>
-<div class="issue">
-<div class="id"><a href="#" title="Return to top">GradleDependency: Obsolete Gradle Dependency</a><div class="issueSeparator"></div>
-</div>
-<div class="warningslist">
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:28</span>: <span class="message">A newer version of com.android.tools.build:gradle than 2.1.0 is available: 2.2.0</span><br /><pre class="errorlines">
-<span class="lineno">  25</span>     }
-<span class="lineno">  26</span> 
-<span class="lineno">  27</span>     dependencies {
-<span class="lineno">  28</span>         <span class="errorspan">classpath 'com.android.tools.build:gradle:2.1.0'</span>
-<span class="lineno">  29</span>     }
-<span class="lineno">  30</span> 
-</pre>
-</div>
-<div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ<br>
-Priority: 4 / 10<br/>
-Category: Correctness</div>
-Severity: <span class="warning">Warning</span><div class="summary">
-Explanation: Obsolete Gradle Dependency.</div>
-<div class="explanation">
-This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find.
-</div>
-<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "GradleDependency" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
-</div>
 
 <a name="Security"></a>
 <div class="category"><a href="#" title="Return to top">Security</a><div class="categorySeparator"></div>
@@ -418,7 +390,7 @@ This detector looks for usages of libraries where the version you are using is n
 <span class="lineno"> 259</span>             return;
 <span class="lineno"> 260</span>         }
 <span class="lineno"> 261</span>         SystemExposedJsApi exposedJsApi = new SystemExposedJsApi(bridge);
-<span class="lineno"> 262</span>         webView.<span class="errorspan">addJavascriptInterface(exposedJsApi, "_cordovaNative");</span>
+<span class="lineno"> 262</span>         webView.<span class="errorspan">addJavascriptInterface(exposedJsApi, "_cordovaNative");</span>
 <span class="lineno"> 263</span>     }
 <span class="lineno"> 264</span> 
 </pre>
@@ -442,7 +414,7 @@ For applications built for API levels below 17, <code>WebView#addJavascriptInter
 <span class="lineno"> 111</span> 
 <span class="lineno"> 112</span>     /** Called by cordova.js to initialize the bridge. */
 <span class="lineno"> 113</span>     int generateBridgeSecret() {
-<span class="lineno"> 114</span>         <span class="errorspan">SecureRandom randGen = new SecureRandom();</span>
+<span class="lineno"> 114</span>         <span class="errorspan">SecureRandom randGen = new SecureRandom();</span>
 <span class="lineno"> 115</span>         expectedBridgeSecret = randGen.nextInt(Integer.MAX_VALUE);
 <span class="lineno"> 116</span>         return expectedBridgeSecret;
 </pre>
@@ -555,7 +527,7 @@ Disabled By: Default<br/>
 Priority: 5 / 10<br/>
 Category: Usability</div>
 Severity: <span class="warning">Warning</span><div class="summary">
-Explanation: Missing support for Google App Indexing Api.</div>
+Explanation: Missing support for Firebase App Indexing Api.</div>
 <div class="explanation">
 Adds URLs to get your app into the Google index, to get installs and traffic to your app from Google Search.
 </div>

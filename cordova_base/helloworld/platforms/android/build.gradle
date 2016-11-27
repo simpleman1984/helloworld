@@ -31,7 +31,7 @@ buildscript {
     // http://tools.android.com/tech-docs/new-build-system/version-compatibility
     // and https://issues.apache.org/jira/browse/CB-8143
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.2.2'
     }
 }
 
@@ -151,6 +151,33 @@ task cdvPrintProps << {
         println('computed' + flavor.name.capitalize() + 'VersionCode=' + flavor.versionCode)
     }
 }
+
+class HelloWorldTask extends DefaultTask {
+    //@Optional，表示在配置该Task时，message是可选的。
+    @Optional
+    String message = 'I am jjx'
+    //@TaskAction表示该Task要执行的动作,即在调用该Task时，hello()方法将被执行
+    @TaskAction
+    def hello(){
+        println "hello world $message"
+    }
+}
+
+//重新设置了message的值
+task helloOne(type:HelloWorldTask){
+    message ="I am a android developer"
+}
+
+task copyFile(type:Copy){org.gradle.api.tasks.Delete
+    description = 'Copies html5 files from the common library...'
+    from '../../www'
+    into 'assets/www'
+    include('**/*')
+}
+
+//http://stackoverflow.com/questions/17213236/how-to-run-copy-task-with-android-studio-into-assets-folder
+//此设置，参考了上面的文章，灰常有用
+preBuild.dependsOn copyFile
 
 android {
     sourceSets {
