@@ -154,7 +154,7 @@ task cdvPrintProps << {
 
 class HelloWorldTask extends DefaultTask {
     //@Optional，表示在配置该Task时，message是可选的。
-    @Optional
+    @org.gradle.api.tasks.Optional
     String message = 'I am jjx'
     //@TaskAction表示该Task要执行的动作,即在调用该Task时，hello()方法将被执行
     @TaskAction
@@ -168,8 +168,15 @@ task helloOne(type:HelloWorldTask){
     message ="I am a android developer"
 }
 
-task copyFile(type:Copy){org.gradle.api.tasks.Delete
-    description = 'Copies html5 files from the common library...'
+task copyFile(type:Copy){
+    //删除原目录
+    doFirst {
+        println("删除原来的assets目录");
+        File file1 = new File(rootDir.getAbsolutePath() +"/assets/www");
+        file1.deleteDir();
+    }
+    description = '复制前端文件到assets目录中'
+    from 'platform_www'
     from '../../www'
     into 'assets/www'
     include('**/*')
