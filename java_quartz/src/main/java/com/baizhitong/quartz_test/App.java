@@ -1,17 +1,14 @@
 package com.baizhitong.quartz_test;
 
 import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
+import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
-import static org.quartz.TriggerBuilder.*;
-import static org.quartz.CronScheduleBuilder.*;
-import static org.quartz.DateBuilder.*;
+
 import com.baizhitong.quartz_test.job.HelloJob;
 
 /**
@@ -48,7 +45,11 @@ public class App {
 			// .withSchedule(simpleSchedule().withIntervalInSeconds(2).repeatForever()).build();
 
 			Trigger trigger = newTrigger().withIdentity("trigger3", "group1")
-					.withSchedule(cronSchedule("0/2 * * * * ?")).forJob("job1", "group1").build();
+//					.withSchedule(cronSchedule("0/2 * * * * ?"))
+					.withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(2))
+					.forJob("job1", "group1")
+					
+					.build();
 
 			// Tell quartz to schedule the job using our trigger
 			scheduler.scheduleJob(job, trigger);
