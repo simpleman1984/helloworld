@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accessible Map</title>
+    <link rel="stylesheet" href="ol/ol.css" type="text/css">
+    <script src="ol/ol.js"></script>
+    <style>
+      a.skiplink {
+        position: absolute;
+        clip: rect(1px, 1px, 1px, 1px);
+        padding: 0;
+        border: 0;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+      }
+      a.skiplink:focus {
+        clip: auto;
+        height: auto;
+        width: auto;
+        background-color: #fff;
+        padding: 0.3em;
+      }
+      #map:focus {
+        outline: #4A74A8 solid 0.15em;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skiplink" href="#map">Go to map</a>
+    <div id="map" class="map" tabindex="0"></div>
+    <button id="zoom-out">Zoom out</button>
+    <button id="zoom-in">Zoom in</button>
+    <script>
+        
+        
+    var bd_decrypt = function (bd_lon, bd_lat)  
+    {  
+        var x_pi = 3.14159265358979324 * 3000.0 / 180.0; 
+        var x = bd_lon - 0.0065, y = bd_lat - 0.006;  
+        var z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_pi);  
+        var theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi);  
+        var gg_lon = z * Math.cos(theta);  
+        var gg_lat = z * Math.sin(theta);
+        console.info(bd_lon,bd_lat);
+        console.info(gg_lon,gg_lat);
+        return [gg_lon, gg_lat];
+    }
+    
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        target: 'map',
+        controls: ol.control.defaults({
+          attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+            collapsible: false
+          })
+        }),
+        view: new ol.View({
+          center: ol.proj.fromLonLat(bd_decrypt(119.3156119462,  34.0872867469)),
+          zoom: 12
+        })
+      });
+
+      document.getElementById('zoom-out').onclick = function() {
+        var view = map.getView();
+        var zoom = view.getZoom();
+        view.setZoom(zoom - 1);
+      };
+
+      document.getElementById('zoom-in').onclick = function() {
+        var view = map.getView();
+        var zoom = view.getZoom();
+        view.setZoom(zoom + 1);
+      };
+    </script>
+  </body>
+</html>
