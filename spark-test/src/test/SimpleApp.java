@@ -15,12 +15,12 @@ public class SimpleApp {
 		
 		String logFile = "assets/README.md"; // Should be some file on your system
 		//本地调试模式，运行Spark程序
-//		SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application");
+		SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application");
 		
 		//远程提交任务到服务器
-		SparkConf conf = new SparkConf().setMaster("spark://192.168.233.128:7077")
-				.setJars(new String[]{"D:\\workspace\\workspace_bzt_lab\\spark-test\\target\\spark-test-0.0.1-SNAPSHOT-shaded.jar"})
-				.setAppName("Simple Application");
+//		SparkConf conf = new SparkConf().setMaster("spark://192.168.233.128:7077")
+//				.setJars(new String[]{"D:\\workspace\\workspace_bzt_lab\\spark-test\\target\\spark-test-0.0.1-SNAPSHOT-shaded.jar"})
+//				.setAppName("Simple Application");
 		
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		

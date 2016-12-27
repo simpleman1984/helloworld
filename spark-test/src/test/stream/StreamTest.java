@@ -27,13 +27,13 @@ public class StreamTest {
 	public static void main(String[] args) {
 		logger.setLevel(Level.DEBUG);
 
-		SparkConf conf = new SparkConf().setMaster("spark://192.168.233.128:7077")
-				.setJars(new String[] {
-						"D:\\workspace\\workspace_bzt_lab\\spark-test\\target\\spark-test-0.0.1-SNAPSHOT-shaded.jar" })
-				.setAppName("NetworkWordCount");
+//		SparkConf conf = new SparkConf().setMaster("spark://192.168.233.128:7077")
+//				.setJars(new String[] {
+//						"D:\\workspace\\workspace_bzt_lab\\spark-test\\target\\spark-test-0.0.1-SNAPSHOT-shaded.jar" })
+//				.setAppName("NetworkWordCount");
 
-//		 SparkConf conf = new
-//		 SparkConf().setMaster("local[2]").setAppName("NetworkWordCount");
+		 SparkConf conf = new
+		 SparkConf().setMaster("local[2]").setAppName("NetworkWordCount");
 
 		JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(1));
 
