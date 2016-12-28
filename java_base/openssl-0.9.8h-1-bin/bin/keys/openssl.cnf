@@ -1,0 +1,62 @@
+
+[ ca ]
+default_ca	= CA_default
+
+[ CA_default ]
+private_key	= ./keys/cakey.pem # The private key
+new_certs_dir	= ./keys
+database	= ./keys/index.txt
+default_md	= md5
+policy		= policy_match
+serial		= ./keys/serial
+
+default_days	= 365
+
+
+[ policy_match ]
+
+####################################################################
+[ req ]
+default_bits		= 1024
+default_keyfile 	= privkey.pem
+distinguished_name	= req_distinguished_name
+
+[ req_distinguished_name ]
+countryName			=CN
+countryName_default		= CN
+countryName_min			= 2
+countryName_max			= 2
+
+stateOrProvinceName		=SUZHOU
+stateOrProvinceName_default	=SUZHOU
+
+localityName			= SZ
+0.organizationName		= suzhou
+0.organizationName_default	=suzhou
+
+# we can do this but it is not needed normally :-)
+#1.organizationName		= Second Organization Name (eg, company)
+#1.organizationName_default	= World Wide Web Pty Ltd
+
+organizationalUnitName		= suzhou
+#organizationalUnitName_default	=
+
+commonName			= suzhou
+commonName_max			= 64
+
+emailAddress			= Email Address
+emailAddress_default    = 75971994@qq.com
+emailAddress_max		= 40
+
+[ v3_req ]
+    # Extensions to add to a certificate request
+    basicConstraints = CA:TRUE
+    keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+    subjectAltName = @alt_names
+
+	
+[alt_names]
+    DNS.1 = ns1.dns.com
+    DNS.2 = ns2.dns.com
+    DNS.3 = ns3.dns.com
+    IP.1 = 192.168.1.84

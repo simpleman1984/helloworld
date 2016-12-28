@@ -1,0 +1,20 @@
+openssl genrsa -out ca-key.pem -des 1024                                       ===========〉生成 CA 证书的 RSA 密钥对
+openssl req -new  -key ca-key.pem -out ca-csr.pem  -config openssl.cnf         ===========〉为了获取一个 CA 根证书，我们需要先制作一份证书请求
+openssl x509 -req -days 3650 -in ca-csr.pem -signkey ca-key.pem -out ca-cert.pem         ===================〉对 CA 证书请求进行签名
+
+假设上述配置文件为“openssl.cnf”，则生成服务器私钥及证书的方法如下：
+openssl genrsa -out server-key.pem 1024
+openssl req -new -key server-key.pem -config openssl.cnf -out server-csr.pem
+openssl x509 -req -days 3650 -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in server-csr.pem -out server-cert.pem -extensions v3_req -extfile openssl.cnf
+
+
+openssl pkcs12 -export -in server-cert.pem -inkey server-key.pem -certfile ca-cert.pem -out server.pfx   ============> 服务器证书
+
+这样携带和使用都更加方便。最后就是生成客户端证书：
+
+openssl genrsa -out client-key.pem
+openssl req -new -key client-key.pem -out client-csr.pem -config openssl.cnf
+openssl x509 -req -days 365 -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in client-csr.pem -out client-cert.pem -extensions v3_req -extfile openssl.cnf
+
+openssl pkcs12 -export -in client-cert.pem -inkey client-key.pem -certfile ca-cert.pem -out client.p12   ===============〉客户端证书 浏览器导入专用！！！！
+
