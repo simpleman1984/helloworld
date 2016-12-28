@@ -1,6 +1,7 @@
 package test.stream;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -24,7 +25,7 @@ public class StreamTest {
 	// private static Logger logger = LogManager.getRootLogger();
 	transient static Logger logger = org.apache.log4j.LogManager.getLogger("myLogger");
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		logger.setLevel(Level.DEBUG);
 
 //		SparkConf conf = new SparkConf().setMaster("spark://192.168.233.128:7077")
@@ -37,7 +38,7 @@ public class StreamTest {
 
 		JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(1));
 
-		// socket ÊäÈëÔ´
+		// socket è¾“å…¥æº
 		// JavaReceiverInputDStream<String> lines =
 		// jssc.socketTextStream("192.168.0.138", 9999);
 
@@ -46,10 +47,10 @@ public class StreamTest {
 
 		JavaDStream<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
 			@Override
-			public Iterable<String> call(String x) {
-				System.out.println("--------------------------¿ªÊ¼²ğ·Ö¾ä×Ó ----------------------" + x);
-				logger.warn("--------------------------¿ªÊ¼²ğ·Ö¾ä×Ó ----------------------" + x);
-				return Arrays.asList(x.split(" "));
+			public Iterator<String> call(String x) {
+				System.out.println("--------------------------å¼€å§‹æ‹†åˆ†å¥å­ ----------------------" + x);
+				logger.warn("--------------------------å¼€å§‹æ‹†åˆ†å¥å­ ----------------------" + x);
+				return (Iterator<String>) Arrays.asList(x.split(" "));
 			}
 		});
 
