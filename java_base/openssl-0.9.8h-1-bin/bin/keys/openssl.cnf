@@ -30,9 +30,10 @@ countryName_max			= 2
 stateOrProvinceName		=SUZHOU
 stateOrProvinceName_default	=SUZHOU
 
-localityName			= SZ
-0.organizationName		= suzhou
-0.organizationName_default	=suzhou
+localityName			= SUZHOU
+localityName_default	= SUZHOU
+0.organizationName		= baizhitong
+0.organizationName_default	=baizhitong
 
 # we can do this but it is not needed normally :-)
 #1.organizationName		= Second Organization Name (eg, company)
@@ -41,7 +42,7 @@ localityName			= SZ
 organizationalUnitName		= suzhou
 #organizationalUnitName_default	=
 
-commonName			= suzhou
+commonName			= baizhitong
 commonName_max			= 64
 
 emailAddress			= Email Address
@@ -56,7 +57,7 @@ emailAddress_max		= 40
 
 	
 [alt_names]
-    DNS.1 = ns1.dns.com
-    DNS.2 = ns2.dns.com
-    DNS.3 = ns3.dns.com
-    IP.1 = 192.168.1.84
+    DNS.1 = www.baizhitong.net
+    DNS.2 = test.emooc.com
+    DNS.3 = sgz.emooc.com
+    IP.1  = 112.80.45.178

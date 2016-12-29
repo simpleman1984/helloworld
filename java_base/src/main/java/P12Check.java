@@ -31,7 +31,7 @@ public class P12Check {
 	public static void main(String args[]) throws KeyStoreException, NoSuchAlgorithmException, CertificateException,
 			FileNotFoundException, IOException, UnrecoverableKeyException {
 		KeyStore p12 = KeyStore.getInstance("pkcs12");
-		p12.load(P12Check.class.getResourceAsStream("client.p12"), "bzt@2017".toCharArray());
+		p12.load(P12Check.class.getResourceAsStream("client_2.p12"), "bzt@2017".toCharArray());
 		Enumeration e = p12.aliases();
 		String alias = null;
 		while (e.hasMoreElements()) {
@@ -72,8 +72,13 @@ public class P12Check {
 		System.out.println("public key  = " + bytesToHexString(pubkey.getEncoded()));
 		System.out.println("private key = " + bytesToHexString(prikey.getEncoded()));
 		
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
 		
 		//读取ca的pem
+		//openssl pkcs12 -export -in client-cert.pem -inkey client-key.pem -certfile ca-cert.pem -out client.p12
 		PemReader reader = new PemReader(new InputStreamReader(P12Check.class.getResourceAsStream("/client-cert.pem"), Charset.defaultCharset()));
 		PemObject pemObject = reader.readPemObject();
 		System.out.println(pemObject.getType());
