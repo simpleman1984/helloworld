@@ -57,7 +57,13 @@ emailAddress_max		= 40
 
 	
 [alt_names]
-    DNS.1 = www.baizhitong.net
-    DNS.2 = test.emooc.com
-    DNS.3 = sgz.emooc.com
+    DNS.1 = test.emooc.com
+    DNS.2 = mooc.czsz.cn
+    DNS.3 = www.mdsyzx.com
+	DNS.4 = hutang.school.emooc.com
+	DNS.5 = s.yzwenj.com
+	DNS.6 = www.tcsyzx.cn
+	DNS.7 = sgz.emooc.com
+	DNS.10 = www.baizhitong.net
+	DNS.11 = 127.0.0.1
     IP.1  = 112.80.45.178
