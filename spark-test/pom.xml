@@ -4,6 +4,20 @@
 	<groupId>spark-test</groupId>
 	<artifactId>spark-test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<spark.version>2.1.0</spark.version>
+		<scala.binary.version>2.11</scala.binary.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>cloudera</id>
+			<name>Cloudera Maven Repository</name>
+			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -54,25 +68,25 @@
 		<!-- https://mvnrepository.com/artifact/com.sparkjava/spark-core -->
 		<dependency>
 			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-mllib_2.11</artifactId>
-			<version>2.1.0</version>
+			<artifactId>spark-mllib_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-core_2.11</artifactId>
-			<version>2.1.0</version>
+			<artifactId>spark-core_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-streaming_2.11</artifactId>
-			<version>2.1.0</version>
+			<artifactId>spark-streaming_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-streaming-mqtt_2.11</artifactId>
+			<artifactId>spark-streaming-mqtt_${scala.binary.version}</artifactId>
 			<version>1.6.3</version>
 		</dependency>
 
@@ -82,12 +96,34 @@
 			<version>1.1.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>2.7.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase 
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-client</artifactId>
+			<version>1.2.4</version>
+		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-spark -->
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-spark</artifactId>
+			<version>2.0.0-cdh6.x-SNAPSHOT</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.jblas/jblas -->
 		<dependency>
 			<groupId>org.jblas</groupId>
 			<artifactId>jblas</artifactId>
 			<version>1.2.4</version>
 		</dependency>
+
+
 
 	</dependencies>
 </project>

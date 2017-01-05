@@ -47,6 +47,7 @@ object Recommend {
     val rank = 12
     val lambda = 0.01
     val numIterations = 20
+    //调用Spark的ALS算法~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     val model = ALS.train(ratings, rank, numIterations, lambda)
 
     //训练完后，我们看看model中的用户和商品特征向量：
@@ -74,7 +75,7 @@ object Recommend {
 
     //查看用户编号为4904的用户的预测结果中预测评分排前10的商品：
     val userId = users.take(1)(0) //4904
-    println(userId)
+    println("用户:" + userId)
     val K = 10
     val topKRecs = model.recommendProducts(userId, K)
     println(topKRecs.mkString("\n"))
@@ -95,7 +96,7 @@ object Recommend {
     val itemId = 2055
     val itemFactor = model.productFeatures.lookup(itemId).head
     val itemVector = new DoubleMatrix(itemFactor)
-    println(cosineSimilarity(itemVector, itemVector))
+    println(itemId + ":实际评分和预测评分相似度:" + +cosineSimilarity(itemVector, itemVector))
 
     //找到和该商品最相似的10个商品：
     val sims = model.productFeatures.map {
@@ -105,10 +106,22 @@ object Recommend {
         (id, sim)
     }
     val sortedSims = sims.top(K)(Ordering.by[(Int, Double), Double] { case (id, similarity) => similarity })
-    println(sortedSims.mkString("\n"))
+    println("和该商品最相似的10个商品:" + sortedSims.mkString("\n"))
 
     val sortedSims2 = sims.top(K + 1)(Ordering.by[(Int, Double), Double] { case (id, similarity) => similarity })
-    println( sortedSims2.slice(1, 11).map{ case (id, sim) => (id, sim) }.mkString("\n"))
+    println("和该商品最相似的10个商品(不包括自己)" + sortedSims2.slice(1, 11).map { case (id, sim) => (id, sim) }.mkString("\n"))
+
+    //给该用户推荐的商品为：
+    val actualProducts = productsForUser.map(_.product)
+    //给该用户预测的商品为：
+    val predictedProducts = topKRecs.map(_.product)
+    //最后的准确度为：
+    val apk10 = avgPrecisionK(actualProducts, predictedProducts, 10)
+    println("平均准确度:" + apk10);
+    
+    val outputDir="/tmp"
+    model.userFeatures.map{ case (id, vec) => id + "\t" + vec.mkString(",") }.saveAsTextFile(outputDir + "/userFeatures")
+    model.productFeatures.map{ case (id, vec) => id + "\t" + vec.mkString(",") }.saveAsTextFile(outputDir + "/productFeatures")
     
   }
 
@@ -158,4 +171,25 @@ object Recommend {
     //    }).saveAsTextFile("/tmp/result")
 
   }
+
+  /*可以计算给该用户推荐的前K个商品的平均准确度MAPK*/
+  /* Function to compute average precision given a set of actual and predicted ratings */
+  // Code for this function is based on: https://github.com/benhamner/Metrics
+  def avgPrecisionK(actual: Seq[Int], predicted: Seq[Int], k: Int): Double = {
+    val predK = predicted.take(k)
+    var score = 0.0
+    var numHits = 0.0
+    for ((p, i) <- predK.zipWithIndex) {
+      if (actual.contains(p)) {
+        numHits += 1.0
+        score += numHits / (i.toDouble + 1.0)
+      }
+    }
+    if (actual.isEmpty) {
+      1.0
+    } else {
+      score / scala.math.min(actual.size, k).toDouble
+    }
+  }
+  
 }
