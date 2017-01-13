@@ -17,14 +17,14 @@ Buffer.prototype.toByteArray = function () {
 // const buf4 = Buffer.from(iv);
 // console.info(buf4.toString('hex'));
 
-var xml="<?xml version=\"1.0\" encoding=\"utf-8\" ?>\
-<root>\
-<common>\
-<building_id>1234567020</building_id>\
-<gateway_id>123456702150</gateway_id>\
-<type>request</type>\
-</common>\
-<id_validate operation=\"request\" />\
+var xml="<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n\
+<root>\n\
+<common>\n\
+<building_id>1234567020</building_id>\n\
+<gateway_id>123456702150</gateway_id>\n\
+<type>request</type>\n\
+</common>\n\
+<id_validate operation=\"request\" />\n\
     </root>"
 
 var crypto = require('crypto');
@@ -44,9 +44,9 @@ function decrypt(plaintext) {
     return decrypted;
 }
 var s1 = encrypt(xml);
-console.info(s1);
+//console.info(s1);
 var s2 = decrypt(s1);
-console.info(s2);
+//console.info(s2);
 
 // var v = Buffer.from(tt, 'hex')
 
@@ -55,10 +55,11 @@ console.info(s2);
 var newkey = Buffer.from([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
 var newiv  = Buffer.from([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
 
-//var befores = encrypt1(xml,newkey,newiv);
-var befores = Buffer.from(s,"hex");
-var newkey1 = Buffer.from("0102030405060708090a0b0c0d0e0f10","utf8")
+console.info("加密前:",Buffer.from(xml,"utf8").toString("hex"))
+var befores = encrypt1(xml,newkey,newiv);
+console.info("加密后============",befores.toString("hex"));
 console.info("解密前:"+s)
+var befores = Buffer.from(s,"hex");
 var s3 = decrypt1(befores,newkey,newiv);
 
 function decrypt1(plaintext,key,iv) {
@@ -85,7 +86,7 @@ function decrypt1(plaintext,key,iv) {
 function encrypt1(plaintext,key,iv) {
     var decipher  = crypto.createCipheriv('aes-128-cbc',key, iv);
     decipher.setAutoPadding(true);
-    var encrypted = decipher.update(plaintext);
+    var encrypted = decipher.update(plaintext,"utf8");
     var all = Buffer.concat([encrypted,decipher.final()]);
     return all;
 }
