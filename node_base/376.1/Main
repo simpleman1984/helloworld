@@ -1,0 +1,5 @@
+var startPrefix = "68";
+
+var buffer = Buffer.from(startPrefix,"hex");
+
+console.info(buffer);
