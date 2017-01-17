@@ -14,13 +14,13 @@ public class SimpleApp {
 		System.setProperty("hadoop.home.dir", "D:\\workspace\\workspace_bzt_lab\\spark-test\\hadoop");
 		
 		String logFile = "assets/README.md"; // Should be some file on your system
-		//本地调试模式，运行Spark程序
-//		SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application");
+		//鏈湴璋冭瘯妯″紡锛岃繍琛孲park绋嬪簭
+		SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application");
 		
-		//远程提交任务到服务器
-		SparkConf conf = new SparkConf().setMaster("spark://192.168.233.128:7077")
-				.setJars(new String[]{"D:\\workspace\\workspace_bzt_lab\\spark-test\\target\\spark-test-0.0.1-SNAPSHOT-shaded.jar"})
-				.setAppName("Simple Application");
+		//杩滅▼鎻愪氦浠诲姟鍒版湇鍔″櫒
+//		SparkConf conf = new SparkConf().setMaster("spark://192.168.233.128:7077")
+//				.setJars(new String[]{"D:\\workspace\\workspace_bzt_lab\\spark-test\\target\\spark-test-0.0.1-SNAPSHOT-shaded.jar"})
+//				.setAppName("Simple Application");
 		
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		

@@ -1,3 +1,5 @@
+#coding:utf-8
+
 import time
 import random
 import math
@@ -68,10 +70,11 @@ def schedulecost(sol):
   
   return totalprice+totalwait
 
+#随机优化算法
 def randomoptimize(domain,costf):
   best=999999999
   bestr=None
-  for i in range(0,1000):
+  for i in range(0,10000):
     # Create a random solution
     r=[float(random.randint(domain[i][0],domain[i][1])) 
        for i in range(len(domain))]
@@ -85,6 +88,7 @@ def randomoptimize(domain,costf):
       bestr=r 
   return r
 
+#爬山法
 def hillclimb(domain,costf):
   # Create a random solution
   sol=[random.randint(domain[i][0],domain[i][1])
@@ -147,6 +151,7 @@ def annealingoptimize(domain,costf,T=10000.0,cool=0.95,step=1):
     T=T*cool
   return vec
 
+#遗传算法
 def geneticoptimize(domain,costf,popsize=50,step=1,
                     mutprob=0.2,elite=0.2,maxiter=100):
   # Mutation Operation
