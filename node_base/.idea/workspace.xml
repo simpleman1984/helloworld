@@ -23,8 +23,8 @@
       <file leaf-file-name="packet.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/376.1/packet.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="161" column="50" lean-forward="true" selection-start-line="161" selection-start-column="50" selection-end-line="161" selection-end-column="50" />
+            <state relative-caret-position="1121">
+              <caret line="65" column="2" lean-forward="true" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -66,7 +66,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="715" />
+    <option name="x" value="940" />
     <option name="width" value="1191" />
     <option name="height" value="1047" />
   </component>
@@ -546,15 +546,15 @@
       <workItem from="1484309894107" duration="18000" />
       <workItem from="1484839753967" duration="3177000" />
       <workItem from="1484916551741" duration="7080000" />
-      <workItem from="1484997580873" duration="9101000" />
+      <workItem from="1484997580873" duration="12269000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29896000" />
+    <option name="totallyTimeSpent" value="33064000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="715" y="0" width="1191" height="1047" extended-state="0" />
+    <frame x="940" y="0" width="1191" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -677,8 +677,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/376.1/packet.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="161" column="50" lean-forward="true" selection-start-line="161" selection-start-column="50" selection-end-line="161" selection-end-column="50" />
+        <state relative-caret-position="1121">
+          <caret line="65" column="2" lean-forward="true" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
