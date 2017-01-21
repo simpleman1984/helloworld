@@ -26,9 +26,18 @@
 //68H-------68
 //L---------32 00-----00110010 00000000
 //L---------32 00-----00110010 00000000
+
 //68H
 //C------------------C9（1个字节）
+//C==================控制域
+//D7    传输方向位DIR（DIR=0：表示此帧报文是由主站发出的下行报文； DIR=1：表示此帧报文是由终端发出的上行报 文。）
+//D6    启动标志位PRM（PRM =1：表示此帧报文来自启动站；PRM =0：表示此帧报文来自从动站。 ）
+//D5    帧计数位FCB;要求访问位ACD
+//D4    帧计数有效位FCV，保留
+//D3-D0  功能码
+
 //A------------------00 02 34 12 00(5字节，A1：2字节“行政区划码”，A2：2字节“终端地址”，A3：1字节“主站地址和组地址标志”
+
 //AFN----------------02
 //AFN=======>应用层功能码
 // 如终端上线时需要发送“登陆”信息来告知主站，AFN=02H
@@ -41,6 +50,7 @@
 // AFN=0CH(请求1类数据)
 // AFN=0DH(请求2类数据)
 // AFN=10H(数据转发)
+
 //SEQ----------------------- 71
 //SEQ===========>帧序列域
 //D7      TpV:   0表示附加信息域无时间标签，反之有。
@@ -65,53 +75,114 @@
 //CS-----------------85
 //16H----------------16
 console.info(pack("C9 00 02 34 12 00 02 71 00 00 01 00"))
+//终端心跳包
+//console.info("上行报文(终端发出)：",extract("68 32 00 32 00 68 C9 00 02 34 12 00 02 71 00 00 01 00 85 16"));
+//console.info("下行报文(主站发出)：",extract("68 32 00 32 00 68 0B 00 02 34 12 00 00 61 00 00 01 00 B5 16"));
+//复位终端
+// console.info("下行报文(主站发出)：",extract("68 8A 00 8A 00 68 41 00 02 34 12 04 01 F0 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 28 53 13 07 05 19 16"));
+// console.info("上行报文(终端发出)：",extract("68 52 00 52 00 68 A0 00 02 34 12 04 00 E0 00 00 01 00 11 00 00 27 52 13 07 05 76 16"));
+//数据抄读
+// console.info(extract("68 E2 00 E2 00 68 4B 00 02 34 12 04 10 E0 00 00 01 00 1F 6B BC 0A 10 00 68 61 10 01 30 12 15 68 11 04 33 33 34 33 7B 16 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 36 02 22 20 05 73 16 "))
+// console.info(extract("68 AE 00 AE 00 68 A8 00 02 34 12 04 10 E0 00 00 01 00 1F 14 00 68 61 10 01 30 12 15 68 91 08 33 33 34 33 84 37 33 33 20 16 4F 00 00 29 01 22 20 05 2E 16 "))
+console.info(extract("68 AE 00 AE 00 68 A8 00 02 34 12 04 10 E4 00 00 01 00 1F 14 00 68 61 10 01 30 12 15 68 91 08 33 33 34 33 84 37 33 33 20 16 4F 00 04 30 56 22 20 05 92 16 "))
 
 /**
  * 解开数据包
  */
-var reg = /68([0-9]{8})68/g
 function extract(str){
+    var reg = /68([0-9A-Za-z]{8})68/g
     var pack = str.replace(/\s+/g,"");
     console.info(pack)
-    //初步提取数据包
+    //初步提取数据包/
     var lenMatch = reg.test(pack);
+    var data;
     if(lenMatch)
     {
         //提取出数据包长度
         var len = extractLen(RegExp.$1);
         //再次进行数据包合法性验证
-        var datarestr = "68([0-9]{8})68([0-9A-Za-z]{"+(len*2+2)+"})16";
+        var datarestr = "68([0-9A-Za-z]{8})68([0-9A-Za-z]{"+(len*2+2)+"})16";
         var datareg = new RegExp(datarestr,"g");
         var dataMatch = datareg.test(pack);
         if(dataMatch)
         {
             var userdata = RegExp.$2+"";
             var C = userdata.substr(0,2);
+            var CBinary = parseInt(C,16).toString(2);
+            //传输方向位
+            //DIR=0：表示此帧报文是由主站发出的下行报文； DIR=1：表示此帧报文是由终端发出的上行报 文。
+            var CDir = CBinary.substr(0,1);
+            //启动标志位
+            //PRM =1：表示此帧报文来自启动站；PRM =0：表示此帧报文来自从动站。
+            var CPrm = CBinary.substr(1,1);
+            //帧计数有效位 FCV
+            //FCV=1：表示 FCB 位有效；FCV=0：表示 FCB 位无效。
+            //当帧计数有效位 FCV=1 时，FCB 表示每个站连续的发送/确认或者请求/响应服务的变化位。
+            var CFcv = CBinary.substr(3,1);
+            //帧计数位 FCB
+            //要求访问位 ACD
+            //ACD 位用于上行响应报文中。
+            //ACD=1 表示终端有重要事件等待访问，则附加信息域中带有事件计数器 EC（EC 见本部分 4.3.4.6.3）；ACD=0 表示终端无事件数据等待访问。
+            var CFcbOrAcd = CBinary.substr(2,1);
+            //功能码
+            //当启动标志位 PRM =1 时
+            //功能码	帧类型	服务功能
+            // 0	——	备用
+            // 1	发送!确认	复位命令
+            // 2～3	——	备用
+            // 4	发送!无回答	用户数据
+            // 5～8	——	备用
+            // 9	请求!响应帧	链路测试
+            // 10	请求!响应帧	请求 1 级数据
+            // 11	请求!响应帧	请求 2 级数据
+            // 12～15	——	备用
+            //当启动标志位 PRM =0 时
+            // 功能码	帧类型	服务功能
+            // 0	确认	认可
+            // 1～7	——	备用
+            // 8	响应帧	用户数据
+            // 9	响应帧	否认：无所召唤的数据
+            // 10	——	备用
+            // 11	响应帧	链路状态
+            // 12～15	——	备用
+            var CFunction = parseInt(CBinary.substr(4,4),2);
+
             var A   = userdata.substr(2,10);
+            //行政区划码 A1
+            var A1  = A.substr(0,4);
+            //终端地址 A2(选址范围为 1～65535。A2=0000H 为无效地址，A2=FFFFH 且 A3 的 D0 位为“  1”  时;表示系统广播地址。)
+            var A2  = parseInt(A.substr(4,4),16);
+            //主站地址和组地址标志 A3
+            //A3 的 D0 位为终端组地址标志，D0=0 表示终端地址 A2 为单地址；D0=1 表示终端地址 A2 为组地 址；A3 的 D1～D7 组成 0～127 个主站地址 MSA。
+            var A3  = A.substr(8,2);
             var AFN = userdata.substr(12,2);
             var SEQ = userdata.substr(14,2);
             var Data = userdata.substring(16,userdata.length-2);
+
+            var DataArray = toBinaryArray(Data,8);
+
             var CS   = userdata.substr(userdata.length-2,2);
-            console.info(userdata);
-            console.info("C",C,"A",A,"AFN",AFN,"SEQ",SEQ,"Data",Data,"CS",CS);
-            {
-                asfd:"asd",asdf:"xcv"
-            }
-            return
-            {
+            data = {
                 "C":C,
+                "CDir":CDir,
+                "CPrm":CPrm,
+                "CFcv":CFcv,
+                "CFcbOrAcd":CFcbOrAcd,
+                "CFunction":CFunction,
                 "A":A,
+                "A1":A1,
+                "A2":A2,
+                "A3":A3,
                 "AFN":AFN,
                 "SEQ":SEQ,
                 "Data":Data,
+                "DataArray":DataArray,
                 "CS":CS
-            }
+            };
         }
     }
-
-    console.info(lenMatch,RegExp.$1,RegExp.$2)
+    return data;
 };
-extract("68 32 00 32 00 68 C9 00 02 34 12 00 02 71 00 00 01 00 85 16")
 
 /**
  * 输出完整的数据格式
@@ -208,11 +279,12 @@ function binarySum(str){
  * @param str
  * @returns {Array}
  */
-function toBinaryArray(str){
+function toBinaryArray(str,fixed){
+    fixed = fixed || 2;
     var result = [];
-    for(var i=0;i<str.length/2;i++)
+    for(var i=0;i<str.length/fixed;i++)
     {
-        result.push(str.substr(2*i,2));
+        result.push(str.substr(fixed*i,fixed));
     }
     return result;
 };
@@ -245,4 +317,10 @@ function fixedLen(str,len)
         str = "0" + str;
     }
     return str;
+}
+/**
+ * 二进制转BCD码
+ */
+function binary2BCD(){
+
 }
