@@ -175,7 +175,7 @@ function extract(str){
             var Data = userdata.substring(16,userdata.length-2);
 
             //消息认证码字段 PW( 16 字节组成) + 事件计数器 EC(2字节）
-            var auxLen = 16 ;
+            var auxLen = 0 ;
             //有时间戳TP（6字节）
             if(SEQTpv == "1"){
                 auxLen = auxLen + 6;
