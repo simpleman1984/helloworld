@@ -82,8 +82,10 @@ console.info(pack("C9 00 02 34 12 00 02 71 00 00 01 00"))
 // console.info("下行报文(主站发出)：",extract("68 8A 00 8A 00 68 41 00 02 34 12 04 01 F0 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 28 53 13 07 05 19 16"));
 // console.info("上行报文(终端发出)：",extract("68 52 00 52 00 68 A0 00 02 34 12 04 00 E0 00 00 01 00 11 00 00 27 52 13 07 05 76 16"));
 //数据抄读
-//
-
+//(发送请求)
+//console.info("请求读数:",extract("68 E2 00 E2 00 68 4B 00 02 34 12 04 10 E0 00 00 01 00 1F 6B BC 0A 10 00 68 61 10 01 30 12 15 68 11 04 33 33 34 33 7B 16 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 13 51 23 21 05 A1 16 "));
+//（回复数据）
+console.info("答复的读数:",extract("68 AE 00 AE 00 68 A8 00 02 34 12 04 10 E0 00 00 01 00 1F 14 00 68 61 10 01 30 12 15 68 91 08 33 33 34 33 AB 39 33 33 49 16 4F 00 00 06 50 23 21 05 AE 16 "))
 
 /**
  * 解开数据包
@@ -156,9 +158,61 @@ function extract(str){
             var A3  = A.substr(8,2);
             var AFN = userdata.substr(12,2);
             var SEQ = userdata.substr(14,2);
+            var SEQBinary = parseInt(SEQ,16).toString(2);
+            //TpV=0：表示在附加信息域中无时间标签 Tp； TpV=1：表示在附加信息域中带有时间标
+            var SEQTpv = SEQBinary.substr(0,1);
+            //FIR置“  1” ，报文的第一帧。   FIN：置“  1” ，报文的最后一帧。
+            //FIR	FIN	应用说明
+            // 0	0	多帧：中间帧
+            // 0	1	多帧：结束帧
+            // 1	0	多帧：第 1 帧，有后续帧。
+            // 1	1	单帧
+            var SEQFir = SEQBinary.substr(1,1);
+            var SEQFin = SEQBinary.substr(2,1);
+            //在所收到的报文中，CON  位置“  1” ，表示需要对该帧报文进行确认；置“  0” ，表示不需要对该帧报文进行确认。
+            var SEQCon = SEQBinary.substr(3,1);
+
             var Data = userdata.substring(16,userdata.length-2);
 
-            var DataArray = toBinaryArray(Data,8);
+            //消息认证码字段 PW( 16 字节组成) + 事件计数器 EC(2字节）
+            var auxLen = 16 ;
+            //有时间戳TP（6字节）
+            if(SEQTpv == "1"){
+                auxLen = auxLen + 6;
+            }
+            //主要数据包部分(需要截取aux的长度）
+            var mainData = Data.substring(0,Data.length-auxLen*2);
+            //数据单元标识定义（信息点标识 DA 和信息类标识 DT）
+            //DA2 采用二进制编码方式表示信息点组，DA1 对位表示某一信息点组的 1～8 个信息点，以此共同构成信息点标识 pn（n=1～2040）
+            var Da2 = parseInt(mainData.substr(0,2),16);//1字节（信息点组 DA2）
+            var Da1 = mainData.substr(2,2);//1字节（信息点元 DA1）
+            console.info(Da2,Da1)
+            //信息类 DT, 由信息类元 DT1 和信息类组 DT2 两个字节构成。
+            var Dt2 = parseInt(mainData.substr(4,2),16);
+            var Dt1 = mainData.substr(6,2);
+            console.info(Dt2,Dt1)
+
+            //PW 16字节
+            //TP 6字节
+
+            //如果等于1，则信息域中带有时间标(6个字节）
+            var Tp ;
+            //启动帧帧序号计数器 PFC(1字节）
+            var TpPFC;
+            //启动帧发送时标(4字节）
+            var TpTime;
+            //允许发送传输延时时间(单位min)(1字节）
+            var TpDelayMin;
+            if(SEQTpv == "1"){
+                Tp = Data.substr(Data.length-12,12);
+                TpPFC = parseInt(Tp.substr(0,2),16);
+                //秒分时日=>[年，月]日，时，分，秒
+                TpTime = "201701" + reversStr(Tp.substr(2,8));
+                TpDelayMin = parseInt(Tp.substr(10,2),16);
+            }
+            console.info("Tp",Tp,"TpPFC",TpPFC,"TpTime",TpTime,"TpDelayMin",TpDelayMin);
+
+            var DataArray = toBinaryArray(mainData,8);
 
             var CS   = userdata.substr(userdata.length-2,2);
             data = {
@@ -174,7 +228,11 @@ function extract(str){
                 "A3":A3,
                 "AFN":AFN,
                 "SEQ":SEQ,
-                "Data":Data,
+                "SEQTpv":SEQTpv,
+                "SEQFir":SEQFir,
+                "SEQFin":SEQFin,
+                "SEQCon":SEQCon,
+                "Data":mainData,
                 "DataArray":DataArray,
                 "CS":CS
             };
@@ -316,6 +374,18 @@ function fixedLen(str,len)
         str = "0" + str;
     }
     return str;
+}
+/**
+ * 将16进制字符串；两两调换位置
+ */
+function reversStr(str){
+    var len = str.length/2;
+    var result="";
+    for(var i=0;i<len;i++)
+    {
+        result+=str.substr(2*(len-i)-2,2);
+    }
+    return result;
 }
 /**
  * 二进制转BCD码
