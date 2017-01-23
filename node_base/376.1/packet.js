@@ -75,17 +75,25 @@
 //CS-----------------85
 //16H----------------16
 console.info(pack("C9 00 02 34 12 00 02 71 00 00 01 00"))
-//终端心跳包
-//console.info("上行报文(终端发出)：",extract("68 32 00 32 00 68 C9 00 02 34 12 00 02 71 00 00 01 00 85 16"));
-// console.info("下行报文(主站发出)：",extract("68 32 00 32 00 68 0B 00 02 34 12 00 00 61 00 00 01 00 B5 16"));
-//复位终端
-// console.info("下行报文(主站发出)：",extract("68 8A 00 8A 00 68 41 00 02 34 12 04 01 F0 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 28 53 13 07 05 19 16"));
-// console.info("上行报文(终端发出)：",extract("68 52 00 52 00 68 A0 00 02 34 12 04 00 E0 00 00 01 00 11 00 00 27 52 13 07 05 76 16"));
-//数据抄读
-//(发送请求)
-//console.info("请求读数:",extract("68 E2 00 E2 00 68 4B 00 02 34 12 04 10 E0 00 00 01 00 1F 6B BC 0A 10 00 68 61 10 01 30 12 15 68 11 04 33 33 34 33 7B 16 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 13 51 23 21 05 A1 16 "));
-//（回复数据）
-console.info("答复的读数:",extract("68 AE 00 AE 00 68 A8 00 02 34 12 04 10 E0 00 00 01 00 1F 14 00 68 61 10 01 30 12 15 68 91 08 33 33 34 33 AB 39 33 33 49 16 4F 00 00 06 50 23 21 05 AE 16 "))
+//数据抄送
+//console.info("数据抄读发送",extract("68 E2 00 E2 00 68 4B 00 02 34 12 04 10 E0 00 00 01 00 1F 6B BC 0A 10 00 68 61 10 01 30 12 15 68 11 04 33 33 34 33 7B 16 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 13 51 23 21 05 A1 16"))
+//console.info("数据抄读回复:",extract("68 AE 00 AE 00 68 A8 00 02 34 12 04 10 E0 00 00 01 00 1F 14 00 68 61 10 01 30 12 15 68 91 08 33 33 34 33 AB 39 33 33 49 16 4F 00 00 06 50 23 21 05 AE 16 "))
+
+//断电（回复）
+// console.info("恢断电（回复）:",extract("68 8E 00 8E 00 68 A8 00 02 34 12 04 10 E5 00 00 01 00 1F 0C 00 68 61 10 01 30 12 15 68 9C 00 35 16 4F 00 05 27 04 00 22 05 3B 16 "))
+
+//通电(回复）
+// console.info("通电（回复）:",extract("68 8E 00 8E 00 68 A8 00 02 34 12 04 10 E7 00 00 01 00 1F 0C 00 68 61 10 01 30 12 15 68 9C 00 35 16 4F 00 07 15 06 00 22 05 2F 16"))
+
+//通电状态查询（通电）
+//console.info("通电状态查询（通电）",extract("68 A6 00 A6 00 68 A8 00 02 34 12 04 10 E8 00 00 01 00 1F 12 00 68 61 10 01 30 12 15 68 91 06 36 38 33 37 33 33 6E 16 4F 00 08 48 06 00 22 05 DC 16"))
+
+//通电状态查询（断开）
+// console.info("通电状态查询（断开）",extract("68 A6 00 A6 00 68 A8 00 02 34 12 04 10 E6 00 00 01 00 1F 12 00 68 61 10 01 30 12 15 68 91 06 36 38 33 37 83 33 BE 16 4F 00 06 04 05 00 22 05 33 16"))
+
+//电表抄读信息(回复）
+console.info("电表抄读信息（回复）",extract("68 F2 00 F2 00 68 A8 00 02 34 12 04 0C E4 01 01 02 15 01 00 00 00 01 33 00 00 22 E1 17 00 00 00 00 00 00 00 02 01 02 15 1F 00 00 FF 00 EE EE EE EE EE EE 34 00 00 22 E1 17 01 4F 00 04 34 00 00 22 05 15 16"));
+
 
 /**
  * 解开数据包
@@ -171,48 +179,45 @@ function extract(str){
             var SEQFin = SEQBinary.substr(2,1);
             //在所收到的报文中，CON  位置“  1” ，表示需要对该帧报文进行确认；置“  0” ，表示不需要对该帧报文进行确认。
             var SEQCon = SEQBinary.substr(3,1);
-
+            //整体数据包解析
             var Data = userdata.substring(16,userdata.length-2);
 
-            //消息认证码字段 PW( 16 字节组成) + 事件计数器 EC(2字节）
-            var auxLen = 0 ;
-            //有时间戳TP（6字节）
-            if(SEQTpv == "1"){
-                auxLen = auxLen + 6;
+            //上行报文和下行报文判断
+            //上行报文
+            var auxLen;
+            var Aux;
+            if(CDir == "1")
+            {
+                //消息认证码字段 PW( 16 字节组成) + 事件计数器 EC(2字节）+ 有时间戳TP（6字节）
+                //数据转发(针对图47）
+                if(AFN == 10)
+                {
+                    auxLen = 2+6 ;
+                    Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
+                    //主要数据包部分(需要截取aux的长度）
+                    var mainData = Data.substring(0,Data.length-auxLen*2);
+
+                    //F1 透明转发数据应答
+                    if(is("F1",mainData))
+                    {
+                        //以下的解析，请参考（表363 透明转发应答数据单元格式，PDF 183页）
+                    }
+                }
+                //第一类数据发送
+                if(AFN == "0C")
+                {
+                    auxLen = 2+6 ;
+                    Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
+                    //主要数据包部分(需要截取aux的长度）
+                    var mainData = Data.substring(0,Data.length-auxLen*2);
+
+                }
             }
-            //主要数据包部分(需要截取aux的长度）
-            var mainData = Data.substring(0,Data.length-auxLen*2);
-            //数据单元标识定义（信息点标识 DA 和信息类标识 DT）
-            //DA2 采用二进制编码方式表示信息点组，DA1 对位表示某一信息点组的 1～8 个信息点，以此共同构成信息点标识 pn（n=1～2040）
-            var Da2 = parseInt(mainData.substr(0,2),16);//1字节（信息点组 DA2）
-            var Da1 = mainData.substr(2,2);//1字节（信息点元 DA1）
-            console.info(Da2,Da1)
-            //信息类 DT, 由信息类元 DT1 和信息类组 DT2 两个字节构成。
-            var Dt2 = parseInt(mainData.substr(4,2),16);
-            var Dt1 = mainData.substr(6,2);
-            console.info(Dt2,Dt1)
-
-            //PW 16字节
-            //TP 6字节
-
-            //如果等于1，则信息域中带有时间标(6个字节）
-            var Tp ;
-            //启动帧帧序号计数器 PFC(1字节）
-            var TpPFC;
-            //启动帧发送时标(4字节）
-            var TpTime;
-            //允许发送传输延时时间(单位min)(1字节）
-            var TpDelayMin;
-            if(SEQTpv == "1"){
-                Tp = Data.substr(Data.length-12,12);
-                TpPFC = parseInt(Tp.substr(0,2),16);
-                //秒分时日=>[年，月]日，时，分，秒
-                TpTime = "201701" + reversStr(Tp.substr(2,8));
-                TpDelayMin = parseInt(Tp.substr(10,2),16);
+            else
+            {
+                console.error("未知数据格式。。。。。。。。")
             }
-            console.info("Tp",Tp,"TpPFC",TpPFC,"TpTime",TpTime,"TpDelayMin",TpDelayMin);
 
-            var DataArray = toBinaryArray(mainData,8);
 
             var CS   = userdata.substr(userdata.length-2,2);
             data = {
@@ -233,7 +238,7 @@ function extract(str){
                 "SEQFin":SEQFin,
                 "SEQCon":SEQCon,
                 "Data":mainData,
-                "DataArray":DataArray,
+                "Aux":Aux,
                 "CS":CS
             };
         }
@@ -241,6 +246,99 @@ function extract(str){
     return data;
 };
 
+/**
+ * 判断当前数据包是否为指定格式的数据包
+ * @param str
+ * @param largeStr
+ */
+function is(str,largeStr)
+{
+    var didt = extractDiDT(largeStr);
+    //判断是否为F
+    if(str.indexOf("F"))
+    {
+        return didt.F == str;
+    }
+    //判断是否为P
+    if(str.indexOf("P"))
+    {
+        return didt.P == str;
+    }
+}
+
+/**
+ * 解析当前的数据标识
+ * @param str
+ */
+function extractDiDT(str){
+    var result = {};
+    var pstr = str.substr(0,4);
+    var fstr = str.substr(4,4);
+    if(pstr == "0000"){
+        result.P = "P0";
+    }
+    if(fstr == "0100"){
+        result.F = "F1";
+    }
+    return result;
+}
+
+/**
+ * 解析出数据Aux
+ */
+function extractAux(hasPW,hasEC,hasTP,str){
+    //pw开始坐标
+    var pwPos = hasPW?0:-1;
+    //ec开始坐标
+    var ecPos = 32;
+    if(!hasPW)
+    {
+        ecPos = 0;
+    }
+    //tp开始坐标
+    var tpPos = 32+4;
+    if(hasPW && !hasEC){
+        tpPos = 32;
+    }
+    if(!hasPW && hasEC){
+        tpPos = 4;
+    }
+    if(!hasPW && !hasEC)
+    {
+        tpPos = 0;
+    }
+    //PW 16字节
+    var PW = hasPW?str.substr(pwPos,32):"";
+    //EC 2字节
+    var EC = hasEC?str.substr(ecPos,4):"";
+    //TP 6字节
+    //如果等于1，则信息域中带有时间标(6个字节）
+    var Tp ;
+    //启动帧帧序号计数器 PFC(1字节）
+    var TpPFC;
+    //启动帧发送时标(4字节）
+    var TpTime;
+    //允许发送传输延时时间(单位min)(1字节）
+    var TpDelayMin;
+    if(hasTP){
+        Tp = str.substr(tpPos,12);
+        TpPFC = parseInt(Tp.substr(0,2),16);
+        //秒分时日=>[年，月]日，时，分，秒
+        TpTime = "201701" + reversStr(Tp.substr(2,8));
+        TpDelayMin = parseInt(Tp.substr(10,2),16);
+    }
+    // console.info("Tp",Tp,"TpPFC",TpPFC,"TpTime",TpTime,"TpDelayMin",TpDelayMin);
+    var result =
+    {
+        PW:PW,
+        EC:EC,
+        Tp:Tp,
+        TpTime:TpTime,
+        TpPFC:TpPFC,
+        TpDelayMin:TpDelayMin
+    };
+    return result
+}
 /**
  * 输出完整的数据格式
  * @param userdata
