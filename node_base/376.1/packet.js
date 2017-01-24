@@ -92,8 +92,13 @@ console.info(pack("C9 00 02 34 12 00 02 71 00 00 01 00"))
 // console.info("通电状态查询（断开）",extract("68 A6 00 A6 00 68 A8 00 02 34 12 04 10 E6 00 00 01 00 1F 12 00 68 61 10 01 30 12 15 68 91 06 36 38 33 37 83 33 BE 16 4F 00 06 04 05 00 22 05 33 16"))
 
 //电表抄读信息(回复）
-console.info("电表抄读信息（回复）",extract("68 F2 00 F2 00 68 A8 00 02 34 12 04 0C E4 01 01 02 15 01 00 00 00 01 33 00 00 22 E1 17 00 00 00 00 00 00 00 02 01 02 15 1F 00 00 FF 00 EE EE EE EE EE EE 34 00 00 22 E1 17 01 4F 00 04 34 00 00 22 05 15 16"));
+// console.info("电表抄读信息（回复）",extract("68 F2 00 F2 00 68 A8 00 02 34 12 04 0C E4 01 01 02 15 01 00 00 00 01 33 00 00 22 E1 17 00 00 00 00 00 00 00 02 01 02 15 1F 00 00 FF 00 EE EE EE EE EE EE 34 00 00 22 E1 17 01 4F 00 04 34 00 00 22 05 15 16"));
 
+//添加表计（回复）
+// console.info("添加表计（回复）",extract("68 52 00 52 00 68 A8 00 02 34 12 04 00 E1 00 00 02 00 4F 00 01 21 21 23 23 05 B4 16"));
+
+//读取表计列表（回复）
+console.info("读取表计列表（回复）",extract("68 32 01 32 01 68 A8 00 02 34 12 04 0A E5 00 00 02 01 02 00 01 00 01 00 C1 02 25 02 00 00 00 00 00 00 00 00 00 00 04 09 00 00 00 00 00 00 F5 02 00 02 00 7F 1E 61 10 01 30 12 15 FF FF FF FF FF FF 01 09 00 00 00 00 00 00 50 4F 00 05 12 39 23 23 05 7E 16"))
 
 /**
  * 解开数据包
@@ -211,6 +216,32 @@ function extract(str){
                     //主要数据包部分(需要截取aux的长度）
                     var mainData = Data.substring(0,Data.length-auxLen*2);
 
+                    if(is("F170",mainData))
+                    {
+
+                    }
+                }
+                //确认∕否认
+                if(AFN == "00"){
+                    auxLen = 2+6 ;
+                    Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
+                    //主要数据包部分(需要截取aux的长度）
+                    var mainData = Data.substring(0,Data.length-auxLen*2);
+
+                    if(is("F2",mainData)){
+
+                    }
+                }
+                //读取参数
+                if(AFN == "0A"){
+                    auxLen = 2+6 ;
+                    Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
+                    //主要数据包部分(需要截取aux的长度）
+                    var mainData = Data.substring(0,Data.length-auxLen*2);
+
+                    if(is("F10",mainData)){
+
+                    }
                 }
             }
             else
@@ -253,16 +284,17 @@ function extract(str){
  */
 function is(str,largeStr)
 {
-    var didt = extractDiDT(largeStr);
+    var dadt = extractDiDT(largeStr);
+    console.info(dadt);
     //判断是否为F
     if(str.indexOf("F"))
     {
-        return didt.F == str;
+        return dadt.F == str;
     }
     //判断是否为P
-    if(str.indexOf("P"))
+    if(str.indexOf("p"))
     {
-        return didt.P == str;
+        return dadt.P == str;
     }
 }
 
@@ -272,14 +304,10 @@ function is(str,largeStr)
  */
 function extractDiDT(str){
     var result = {};
-    var pstr = str.substr(0,4);
-    var fstr = str.substr(4,4);
-    if(pstr == "0000"){
-        result.P = "P0";
-    }
-    if(fstr == "0100"){
-        result.F = "F1";
-    }
+    var dataId = str.substr(0,8);
+    //p如果为0000，则为p0
+    result.P = "p" + ("0000"==str.substr(0,4) ? "0": (parseInt(dataId.substr(0,2),16)+8*(parseInt(dataId.substr(2,2),16)-1)));
+    result.F = "F" + (parseInt(dataId.substr(4,2),16)+8*parseInt(dataId.substr(6,2),16));
     return result;
 }
 
