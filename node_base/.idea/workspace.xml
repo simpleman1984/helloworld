@@ -23,8 +23,8 @@
       <file leaf-file-name="packet.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/376.1/packet.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="212" column="0" lean-forward="true" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
+            <state relative-caret-position="403">
+              <caret line="199" column="70" lean-forward="true" selection-start-line="199" selection-start-column="70" selection-end-line="199" selection-end-column="70" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="n#!!doc;n#is#0" expanded="false" />
@@ -36,21 +36,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="数据示例~~~.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/376.1/数据示例~~~.txt">
+      <file leaf-file-name="ProxyServer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/376.1/ProxyServer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="26" column="59" lean-forward="true" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
+            <state relative-caret-position="-76">
+              <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="0C.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/376.1/0C.txt">
+      <file leaf-file-name="Client.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/376.1/Client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="418">
+              <caret line="40" column="74" lean-forward="false" selection-start-line="40" selection-start-column="74" selection-end-line="40" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="handler.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/376.1/handler.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -81,10 +91,15 @@
         <option value="$PROJECT_DIR$/aescbc.js" />
         <option value="$PROJECT_DIR$/encrypt.js" />
         <option value="$PROJECT_DIR$/376.1/Main.js" />
-        <option value="$PROJECT_DIR$/376.1/数据示例~~~.txt" />
         <option value="$PROJECT_DIR$/376.1/readme.xt" />
-        <option value="$PROJECT_DIR$/376.1/packet.js" />
         <option value="$PROJECT_DIR$/376.1/0C.txt" />
+        <option value="$PROJECT_DIR$/376.1/数据示例~~~.txt" />
+        <option value="$PROJECT_DIR$/376.1/RServer.js" />
+        <option value="$PROJECT_DIR$/376.1/underscore.js" />
+        <option value="$PROJECT_DIR$/376.1/ProxyServer.js" />
+        <option value="$PROJECT_DIR$/376.1/handler.js" />
+        <option value="$PROJECT_DIR$/376.1/packet.js" />
+        <option value="$PROJECT_DIR$/376.1/Client.js" />
       </list>
     </option>
   </component>
@@ -98,8 +113,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="461" />
-    <option name="width" value="1437" />
+    <option name="x" value="491" />
+    <option name="width" value="1400" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
@@ -117,6 +132,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -129,10 +145,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="376.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -151,7 +180,7 @@
       <recent name="D:\workspace\git_lab\node_base\376.1" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.packet.js">
+  <component name="RunManager" selected="Node.js.ProxyServer.js">
     <configuration default="false" name="Main.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="Main.js" working-dir="$PROJECT_DIR$/376.1">
       <profiling v8-profiler-path="" />
       <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
@@ -166,6 +195,13 @@
       <method />
     </configuration>
     <configuration default="false" name="packet.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="D:/worksoftware/nodejs/node" path-to-js-file="packet.js" working-dir="$PROJECT_DIR$/376.1">
+      <profiling v8-profiler-path="" />
+      <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
+        <profiling v8-profiler-path="" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="ProxyServer.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="D:/worksoftware/nodejs/node" path-to-js-file="ProxyServer.js" working-dir="$PROJECT_DIR$/376.1">
       <profiling v8-profiler-path="" />
       <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
         <profiling v8-profiler-path="" />
@@ -596,15 +632,17 @@
       <envs />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Node.js.Main.js" />
       <item index="1" class="java.lang.String" itemvalue="Node.js.aescbc.js" />
       <item index="2" class="java.lang.String" itemvalue="Node.js.encrypt.js" />
       <item index="3" class="java.lang.String" itemvalue="Node.js.packet.js" />
+      <item index="4" class="java.lang.String" itemvalue="Node.js.ProxyServer.js" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.packet.js" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Node.js.ProxyServer.js" />
+        <item index="1" class="java.lang.String" itemvalue="Node.js.packet.js" />
       </list>
     </recent_temporary>
   </component>
@@ -637,15 +675,17 @@
       <workItem from="1485089582902" duration="6030000" />
       <workItem from="1485134366394" duration="1385000" />
       <workItem from="1485135780833" duration="10519000" />
+      <workItem from="1485220582578" duration="464000" />
+      <workItem from="1485221745506" duration="6509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65869000" />
+    <option name="totallyTimeSpent" value="72842000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="461" y="0" width="1437" height="1040" extended-state="0" />
-    <editor active="false" />
+    <frame x="491" y="0" width="1400" height="1040" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -653,22 +693,22 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2706767" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33619764" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14848699" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39967105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -703,6 +743,36 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/376.1/packet.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4028">
+          <caret line="212" column="0" lean-forward="true" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc;n#is#0" expanded="false" />
+            <element signature="n#!!block;n#is#0" expanded="false" />
+            <element signature="n#!!block;n#extractDiDT#0" expanded="false" />
+            <element signature="n#!!block;n#extractAux#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/376.1/数据示例~~~.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/376.1/0C.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/376.1/packet.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
@@ -727,7 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -757,7 +826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -884,6 +952,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/376.1/0C.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/376.1/readme.xt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
@@ -892,18 +968,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/376.1/0C.txt">
+    <entry file="file://$PROJECT_DIR$/376.1/underscore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        <state relative-caret-position="95">
+          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/376.1/数据示例~~~.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/376.1/ProxyServer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/376.1/packet.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="212" column="0" lean-forward="true" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
+        <state relative-caret-position="403">
+          <caret line="199" column="70" lean-forward="true" selection-start-line="199" selection-start-column="70" selection-end-line="199" selection-end-column="70" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="n#!!doc;n#is#0" expanded="false" />
@@ -914,10 +1008,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/376.1/数据示例~~~.txt">
+    <entry file="file://$PROJECT_DIR$/376.1/handler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="26" column="59" lean-forward="true" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
+        <state relative-caret-position="114">
+          <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/376.1/Client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="40" column="74" lean-forward="false" selection-start-line="40" selection-start-column="74" selection-end-line="40" selection-end-column="74" />
           <folding />
         </state>
       </provider>
