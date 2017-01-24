@@ -106,7 +106,6 @@ console.info("读取表计列表（回复）",extract("68 32 01 32 01 68 A8 00 0
 function extract(str){
     var reg = /68([0-9A-Za-z]{8})68/g
     var pack = str.replace(/\s+/g,"");
-    console.info(pack)
     //初步提取数据包/
     var lenMatch = reg.test(pack);
     var data;
@@ -191,57 +190,26 @@ function extract(str){
             //上行报文
             var auxLen;
             var Aux;
+            var mainData;
             if(CDir == "1")
             {
                 //消息认证码字段 PW( 16 字节组成) + 事件计数器 EC(2字节）+ 有时间戳TP（6字节）
-                //数据转发(针对图47）
-                if(AFN == 10)
+                //10 数据转发(针对图47）
+                //0C 第一类数据发送
+                //00 确认∕否认
+                //0A 读取参数
+                if(AFN == '10' || AFN == '0C' || AFN == "00")
                 {
                     auxLen = 2+6 ;
                     Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
                     //主要数据包部分(需要截取aux的长度）
-                    var mainData = Data.substring(0,Data.length-auxLen*2);
-
-                    //F1 透明转发数据应答
-                    if(is("F1",mainData))
-                    {
-                        //以下的解析，请参考（表363 透明转发应答数据单元格式，PDF 183页）
-                    }
+                    mainData = Data.substring(0,Data.length-auxLen*2);
                 }
-                //第一类数据发送
-                if(AFN == "0C")
+                else if(AFN == '02')
                 {
-                    auxLen = 2+6 ;
-                    Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
-                    //主要数据包部分(需要截取aux的长度）
-                    var mainData = Data.substring(0,Data.length-auxLen*2);
-
-                    if(is("F170",mainData))
-                    {
-
-                    }
-                }
-                //确认∕否认
-                if(AFN == "00"){
-                    auxLen = 2+6 ;
-                    Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
-                    //主要数据包部分(需要截取aux的长度）
-                    var mainData = Data.substring(0,Data.length-auxLen*2);
-
-                    if(is("F2",mainData)){
-
-                    }
-                }
-                //读取参数
-                if(AFN == "0A"){
-                    auxLen = 2+6 ;
-                    Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
-                    //主要数据包部分(需要截取aux的长度）
-                    var mainData = Data.substring(0,Data.length-auxLen*2);
-
-                    if(is("F10",mainData)){
-
-                    }
+                    auxLen = 0 ;
+                    Aux = extractAux(false,false,false,Data.substr(-auxLen*2));
+                    mainData = Data.substring(0,Data.length-auxLen*2);
                 }
             }
             else
@@ -249,25 +217,31 @@ function extract(str){
                 console.error("未知数据格式。。。。。。。。")
             }
 
-
+            //返回结果
             var CS   = userdata.substr(userdata.length-2,2);
             data = {
-                "C":C,
-                "CDir":CDir,
-                "CPrm":CPrm,
-                "CFcv":CFcv,
-                "CFcbOrAcd":CFcbOrAcd,
-                "CFunction":CFunction,
-                "A":A,
-                "A1":A1,
-                "A2":A2,
-                "A3":A3,
+                "C":{
+                    "Content":C,
+                    "CDir":CDir,
+                    "CPrm":CPrm,
+                    "CFcv":CFcv,
+                    "CFcbOrAcd":CFcbOrAcd,
+                    "CFunction":CFunction
+                },
+                "A":{
+                    "Content":A,
+                    "A1":A1,
+                    "A2":A2,
+                    "A3":A3
+                },
                 "AFN":AFN,
-                "SEQ":SEQ,
-                "SEQTpv":SEQTpv,
-                "SEQFir":SEQFir,
-                "SEQFin":SEQFin,
-                "SEQCon":SEQCon,
+                "SEQ":{
+                    "Content":SEQ,
+                    "SEQTpv":SEQTpv,
+                    "SEQFir":SEQFir,
+                    "SEQFin":SEQFin,
+                    "SEQCon":SEQCon
+                },
                 "Data":mainData,
                 "Aux":Aux,
                 "CS":CS
@@ -366,6 +340,21 @@ function extractAux(hasPW,hasEC,hasTP,str){
         TpDelayMin:TpDelayMin
     };
     return result
+}
+/**
+ * 逐个进行打包输出
+ * @param C 1字节
+ * @param A 5字节
+ * @param AFN 1字节
+ * @param SEQ 1字节
+ * @param Data
+ * @param EC 1字节
+ * @param TP 6字节
+ */
+function packWith(C,A,AFN,SEQ,Data,EC,TP){
+    EC = EC ? EC : "" ;
+    TP = TP ? TP : "" ;
+    return pack((C+A+AFN+SEQ+Data+EC+TP).replace(/\s+/g,""))
 }
 /**
  * 输出完整的数据格式
@@ -519,3 +508,6 @@ function reversStr(str){
 function binary2BCD(){
 
 }
+exports.extract = extract;
+exports.pack = pack;
+exports.packWith = packWith;
