@@ -1,7 +1,4 @@
-/**
- * Created by xuaihua on 2017/1/24.
- */
-
+var utils  = require("./BinaryUtils");
 var packet = require("./packet");
 
 /**
@@ -72,12 +69,17 @@ function handle(C,A,AFN,SEQ,data,Aux)
             //接收 68 8E 00 8E 00 68 A8 00 02 34 12 04 10 E5 00 00 01 00 1F 0C 00 68 61 10 01 30 12 15 68 9C 00 35 16 4F 00 05 27 04 00 22 05 3B 16
             //000001001f0c0068611001301215689c003516
 
-            //通电状态查询
+            //通电状态查询(断开)
             //发送 68 E2 00 E2 00 68 4B 00 02 34 12 04 10 E6 00 00 01 00 1F 6B BC 0A 10 00 68 61 10 01 30 12 15 68 11 04 36 38 33 37 86 16 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 06 12 06 00 22 05 55 16
             //接收 68 A6 00 A6 00 68 A8 00 02 34 12 04 10 E6 00 00 01 00 1F 12 00 68 61 10 01 30 12 15 68 91 06 36 38 33 37 83 33 BE 16 4F 00 06 04 05 00 22 05 33 16
             //000001001f120068611001301215689106363833378333be16
+
+            //通电状态查询(通电)
+            //发送→ 68 E2 00 E2 00 68 4B 00 02 34 12 04 10 E8 00 00 01 00 1F 6B BC 0A 10 00 68 61 10 01 30 12 15 68 11 04 36 38 33 37 86 16 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 08 56 07 00 22 05 9E 16
+            //接收← 68 A6 00 A6 00 68 A8 00 02 34 12 04 10 E8 00 00 01 00 1F 12 00 68 61 10 01 30 12 15 68 91 06 36 38 33 37 33 33 6E 16 4F 00 08 48 06 00 22 05 DC 16
             console.error("透明数据转发  " + data);
-            unpack(data);
+            var result = unpack(data);
+            console.info(result);
         }
     }
 }
@@ -130,13 +132,53 @@ function unpack(str)
     //cs校验码
     var cs = content.substr(-4,2);
 
-    console.info("content:" + content + "....." + len + "...len" ,"subAddress",subAddress,"subControl",subControl,"subLen",subLen,"subData",subData,"cs",cs);
+    console.info("content:" + content + "....."  + "...len....." + len,"subAddress",subAddress,"subControl",subControl,"subLen",subLen,"subData",subData,"cs",cs);
     console.info(CDir,CAnswerTag,CNextTag,CFunctionCode);
 
-    //读数据
+    var result = {};
+    //读数据（主动抄表回复）
     if(CFunctionCode == "10001"){
-
+        //控制码：C=91H  无后续数据帧；C=B1H  有后续数据帧。----->(从站正常应答)
+        if(subControl == "91"){
+            var _data = utils.sub33H(subData);
+            //数据类型
+            var _dataType = utils.reversStr(_data.substr(0,8));
+            var _reverstr = utils.reversStr(_data.substr(8.8));
+            var _meterData     = parseFloat(_reverstr.substr(0,6)+ "." + _reverstr.substr(6,2));
+            console.info("_dataType",_dataType)
+            //(当前)正向有功总电能(DLT645 23页)
+            if(_dataType == "00010000"){
+                result.dataType = "00010000";
+                result.address  = utils.reversStr(subAddress);
+                result.control  = subControl;
+                result.data     = _meterData;
+            }
+            //通电状态查询(断开)(通电)
+            if(_dataType == "04000503"){
+                result.dataType = "04000503";
+                result.address  = utils.reversStr(subAddress);
+                result.control  = subControl;
+                result.data     = _data;
+            }
+        }
     }
+    //通电回复、断电回复
+    else if(CFunctionCode == "11100"){
+        //从站正常应答帧(控制码：C=9CH 数据域长度：L=00H 帧格式： 68H	A0	…	A5	68H	9CH	00	CS	16)
+        if(subControl == "9c"){
+            result.address  = utils.reversStr(subAddress);
+            result.control  = subControl;
+            result.msg = "从站正常应答帧";
+        }
+        //从站异常应答帧(控制码：C=DCH 数据域长度：L=01H 帧格式：68H	A0	…	A5	68H	DCH	01	ERR	CS	16)
+        //第10页；DLT645~
+        if(subControl == "DC"){
+            result.address  = utils.reversStr(subAddress);
+            result.control  = subControl;
+            result.msg = "从站正常应答帧";
+        }
+    }
+    return result;
 }
 
 /**

@@ -1,3 +1,5 @@
+var utils = require("./BinaryUtils");
+
 //http://stackoverflow.com/questions/40353000/adding-two-binary-and-returning-binary-in-javascript
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators
 
@@ -98,7 +100,7 @@ console.info(pack("C9 00 02 34 12 00 02 71 00 00 01 00"))
 // console.info("添加表计（回复）",extract("68 52 00 52 00 68 A8 00 02 34 12 04 00 E1 00 00 02 00 4F 00 01 21 21 23 23 05 B4 16"));
 
 //读取表计列表（回复）
-console.info("读取表计列表（回复）",extract("68 32 01 32 01 68 A8 00 02 34 12 04 0A E5 00 00 02 01 02 00 01 00 01 00 C1 02 25 02 00 00 00 00 00 00 00 00 00 00 04 09 00 00 00 00 00 00 F5 02 00 02 00 7F 1E 61 10 01 30 12 15 FF FF FF FF FF FF 01 09 00 00 00 00 00 00 50 4F 00 05 12 39 23 23 05 7E 16"))
+// console.info("读取表计列表（回复）",extract("68 32 01 32 01 68 A8 00 02 34 12 04 0A E5 00 00 02 01 02 00 01 00 01 00 C1 02 25 02 00 00 00 00 00 00 00 00 00 00 04 09 00 00 00 00 00 00 F5 02 00 02 00 7F 1E 61 10 01 30 12 15 FF FF FF FF FF FF 01 09 00 00 00 00 00 00 50 4F 00 05 12 39 23 23 05 7E 16"))
 
 /**
  * 解开数据包
@@ -326,7 +328,7 @@ function extractAux(hasPW,hasEC,hasTP,str){
         Tp = str.substr(tpPos,12);
         TpPFC = parseInt(Tp.substr(0,2),16);
         //秒分时日=>[年，月]日，时，分，秒
-        TpTime = "201701" + reversStr(Tp.substr(2,8));
+        TpTime = "201701" + utils.reversStr(Tp.substr(2,8));
         TpDelayMin = parseInt(Tp.substr(10,2),16);
     }
     // console.info("Tp",Tp,"TpPFC",TpPFC,"TpTime",TpTime,"TpDelayMin",TpDelayMin);
@@ -489,18 +491,6 @@ function fixedLen(str,len)
         str = "0" + str;
     }
     return str;
-}
-/**
- * 将16进制字符串；两两调换位置
- */
-function reversStr(str){
-    var len = str.length/2;
-    var result="";
-    for(var i=0;i<len;i++)
-    {
-        result+=str.substr(2*(len-i)-2,2);
-    }
-    return result;
 }
 /**
  * 二进制转BCD码

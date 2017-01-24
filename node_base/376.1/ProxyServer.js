@@ -32,5 +32,5 @@ var sockJoinCallback = function(sock){
     sockArray.push(client);
 };
 //设置服务器接入回调，并开启监听端口
-net.createServer().on("connection",sockJoinCallback).listen(5432,"192.168.1.138");
-net.createServer().on("connection",sockJoinCallback).listen(5442,"192.168.1.138");
+net.createServer().on("connection",sockJoinCallback).listen(5432,"192.168.31.75");
+net.createServer().on("connection",sockJoinCallback).listen(5442,"192.168.31.75");
