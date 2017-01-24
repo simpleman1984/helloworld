@@ -4,7 +4,6 @@
 var net = require('net');
 var Client = require("./Client").Client;
 var _ = require("./underscore");
-
 var sockArray = [];
 /**
  * 客户端连接接入回调
@@ -33,5 +32,5 @@ var sockJoinCallback = function(sock){
     sockArray.push(client);
 };
 //设置服务器接入回调，并开启监听端口
-net.createServer().on("connection",sockJoinCallback).listen(5432,"192.168.0.138");
-net.createServer().on("connection",sockJoinCallback).listen(5442,"192.168.0.138");
+net.createServer().on("connection",sockJoinCallback).listen(5432,"192.168.1.138");
+net.createServer().on("connection",sockJoinCallback).listen(5442,"192.168.1.138");

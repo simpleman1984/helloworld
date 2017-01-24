@@ -101,7 +101,6 @@ console.info(pack("C9 00 02 34 12 00 02 71 00 00 01 00"))
 function extract(str){
     var reg = /68([0-9A-Za-z]{8})68/g
     var pack = str.replace(/\s+/g,"");
-    console.info(pack)
     //初步提取数据包/
     var lenMatch = reg.test(pack);
     var data;
@@ -196,6 +195,13 @@ function extract(str){
                 {
                     auxLen = 2+6 ;
                     Aux = extractAux(false,true,true,Data.substr(-auxLen*2));
+                    //主要数据包部分(需要截取aux的长度）
+                    mainData = Data.substring(0,Data.length-auxLen*2);
+                }
+                else if(AFN == '02')
+                {
+                    auxLen = 0 ;
+                    Aux = extractAux(false,false,false,Data.substr(-auxLen*2));
                     //主要数据包部分(需要截取aux的长度）
                     mainData = Data.substring(0,Data.length-auxLen*2);
                 }
@@ -331,6 +337,21 @@ function extractAux(hasPW,hasEC,hasTP,str){
         TpDelayMin:TpDelayMin
     };
     return result
+}
+/**
+ * 逐个进行打包输出
+ * @param C 1字节
+ * @param A 5字节
+ * @param AFN 1字节
+ * @param SEQ 1字节
+ * @param Data
+ * @param EC 1字节
+ * @param TP 6字节
+ */
+function packWith(C,A,AFN,SEQ,Data,EC,TP){
+    EC = EC ? EC : "" ;
+    TP = TP ? TP : "" ;
+    return pack((C+A+AFN+SEQ+Data+EC+TP).replace(/\s+/g,""))
 }
 /**
  * 输出完整的数据格式
@@ -485,3 +506,5 @@ function binary2BCD(){
 
 }
 exports.extract = extract;
+exports.pack = pack;
+exports.packWith = packWith;

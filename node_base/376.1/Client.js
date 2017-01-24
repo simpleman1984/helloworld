@@ -36,9 +36,10 @@ function Client(sock){
      * @param data
      */
     this.onData = function(data){
-        var packet = packet.extract(data.toString("hex"));
-        console.info(packet);
-        handler.handle(packet.C,packet.A,packet.AFN,packet.SEQ,packet.Data,Aux);
+        var pack = packet.extract(data.toString("hex"));
+        console.info("接收完整数据包为:"+data.toString("hex"));
+        //开始处理对应的数据包
+        handler.handle(pack.C,pack.A,pack.AFN,pack.SEQ,pack.Data,pack.Aux);
         // sock.write('You said "' + data + '"');
     };
 
