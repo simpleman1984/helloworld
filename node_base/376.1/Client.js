@@ -32,6 +32,14 @@ function Client(sock){
     this.id = generateMixed(32);
 
     /**
+     * 发送数据包<br/>
+     * packet 数据包
+     */
+    this.send = function(packet){
+        this.sock.write(Buffer.from(packet,"hex"));
+    };
+
+    /**
      * 接收数据，解析数据包；
      * @param data
      */
@@ -39,7 +47,7 @@ function Client(sock){
         var pack = packet.extract(data.toString("hex"));
         console.info("接收完整数据包为:"+data.toString("hex"));
         //开始处理对应的数据包
-        handler.handle(pack.C,pack.A,pack.AFN,pack.SEQ,pack.Data,pack.Aux);
+        handler.handle.call(this,pack.C,pack.A,pack.AFN,pack.SEQ,pack.Data,pack.Aux);
         // sock.write('You said "' + data + '"');
     };
 

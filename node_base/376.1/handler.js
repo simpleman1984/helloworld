@@ -35,10 +35,12 @@ function handle(C,A,AFN,SEQ,data,Aux)
             console.error("登录  "+"C:"+C.Content+"     A:"+A.Content+"");
             //回复登录确认（或者取消）
             console.error("登录回复 "+ confirmData(A.Content));
+            this.send(confirmData(A.Content));
         }
         if(is("F4",data)){
             console.error("心跳包  "+"C:"+C.Content+"     A:"+A.Content+"");
             console.error("心跳包回复 "+ confirmData(A.Content));
+            this.send(confirmData(A.Content));
         }
     }
 
