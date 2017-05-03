@@ -3,6 +3,8 @@ package com.aq.quartz_test;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import com.aq.quartz_test.trigger.CustomScheduleBuilder;
+import com.aq.quartz_test.trigger.CustomTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SimpleScheduleBuilder;
@@ -44,12 +46,15 @@ public class App {
 			// "group1").startNow()
 			// .withSchedule(simpleSchedule().withIntervalInSeconds(2).repeatForever()).build();
 
-			Trigger trigger = newTrigger().withIdentity("trigger3", "group1")
-//					.withSchedule(cronSchedule("0/2 * * * * ?"))
-					.withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(2))
-					.forJob("job1", "group1")
-					
-					.build();
+//			Trigger trigger = newTrigger().withIdentity("trigger3", "group1")
+////					.withSchedule(cronSchedule("0/2 * * * * ?"))
+//					.withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(2))
+//					.forJob("job1", "group1")
+//
+//					.build();
+
+			CustomScheduleBuilder customScheduleBuilder = new CustomScheduleBuilder();
+			Trigger trigger = newTrigger().withSchedule(customScheduleBuilder).build();
 
 			// Tell quartz to schedule the job using our trigger
 			scheduler.scheduleJob(job, trigger);
