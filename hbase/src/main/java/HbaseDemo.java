@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by xuaihua on 2017/3/25.
+ * http://192.168.177.128:50070/explorer.html#/
+ * http://192.168.177.128:60010/master-status
  */
 public class HbaseDemo {
     static{
@@ -17,7 +19,7 @@ public class HbaseDemo {
     static Configuration hbaseConfiguration = HBaseConfiguration.create();
     static{
 //        hbaseConfiguration.addResource("/hbase-site.xml");
-        hbaseConfiguration.set("hbase.zookeeper.quorum", "192.168.31.247");
+        hbaseConfiguration.set("hbase.zookeeper.quorum", "192.168.177.128");
         hbaseConfiguration.set("fs.hdfs.impl","org.apache.hadoop.hdfs.DistributedFileSystem");
     }
 
@@ -76,8 +78,10 @@ public class HbaseDemo {
         // Scan scan = new Scan();
         // ResultScanner  result = table.getScanner(scan);
         Get get = new Get(Bytes.toBytes(row));
+//        get.setMaxVersions(5)
         Result result = table.get(get);
-        byte[] rb = result.getValue(Bytes.toBytes(columnFamily), Bytes.toBytes(column));
+        byte[] rb = result.getValue(Bytes.toBytes(columnFamily), Bytes.toBytes(column));// returns current version of value
+//        List<KeyValue> kv = r.getColumn(CF, ATTR);  // returns all versions of this column
         String value = new String(rb,"UTF-8");
         System.out.println(value);
     }
@@ -104,7 +108,51 @@ public class HbaseDemo {
         }
     }
 
+    /**
+     * 扫描表格，部分满足条件的数据 <br/>
+     * http://hbase.apache.org/book.html#conceptual.view
+     * @param tableName
+     * @throws IOException
+     */
+    public static void Scan(String tableName) throws IOException{
+        HTable table = new HTable(hbaseConfiguration, tableName);
+        Scan scan = new Scan();
+        //以下其实为数据的查询条件
+        scan.addColumn("baseinfo".getBytes(),"vio2".getBytes());
+        scan.setRowPrefixFilter(Bytes.toBytes("row4_"));
 
+        boolean hasResult = false;
+        ResultScanner resultScanner = table.getScanner(scan);
+        for (Result result : resultScanner) {
+            List<Cell> cells= result.listCells();
+            for (Cell cell : cells) {
+                byte[] rb = cell.getValueArray();
+                String row = new String(result.getRow(),"UTF-8");
+                String family = new String(CellUtil.cloneFamily(cell),"UTF-8");
+                String qualifier = new String(CellUtil.cloneQualifier(cell),"UTF-8");
+                String value = new String(CellUtil.cloneValue(cell),"UTF-8");
+                System.out.println("[row:"+row+"],[family:"+family+"],[qualifier:"+qualifier+"],[value:"+value+"]");
+            }
+            hasResult = true;
+        }
+        if(!hasResult){
+            System.err.println("没有数据！");
+        };
+    }
+
+
+    /**
+     * 删除指定行数据
+     * @param tableName
+     * @param row
+     * @throws IOException
+     */
+    public static void Delete(String tableName,String row) throws IOException {
+        HTable table = new HTable(hbaseConfiguration, tableName);
+        Delete delete = new Delete(row.getBytes());
+        table.delete(delete);
+        System.out.println("删除行" + row);
+    }
 
     /**
      * @param args
@@ -117,8 +165,11 @@ public class HbaseDemo {
 //            for(int i=0;i<100000;i++){
 //                HbaseDemo.PutData("userinfo", "row4_"+i, "baseinfo", "vio" + i, "驾驶车辆违法信息：" + i);
 //            }
-            HbaseDemo.GetData("userinfo", "row4_1","baseinfo","vio1");
+//            HbaseDemo.GetData("userinfo", "row4_1","baseinfo","vio1");
 //            HbaseDemo.ScanAll("userinfo");
+            HbaseDemo.Scan("userinfo");
+
+            HbaseDemo.Delete("userinfo","row4_2");
         } catch (Exception e) {
             e.printStackTrace();
         }
