@@ -1,8 +1,10 @@
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.client.coprocessor.AggregationClient;
+import org.apache.hadoop.hbase.client.coprocessor.LongColumnInterpreter;
+import org.apache.hadoop.hbase.coprocessor.ColumnInterpreter;
 import org.apache.hadoop.hbase.util.Bytes;
-import org.apache.hadoop.hdfs.DistributedFileSystem;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
  * http://192.168.177.128:50070/explorer.html#/
  * http://192.168.177.128:60010/master-status
  */
-public class HbaseDemo {
+public class HbaseSumDemo {
     static{
         System.setProperty("hadoop.home.dir","D:\\softwaredev\\hbase-1.3.0\\hadoop");
     }
@@ -40,6 +42,7 @@ public class HbaseDemo {
         }else{
             TableName tableName = TableName.valueOf(tablename);
             HTableDescriptor tableDesc = new HTableDescriptor(tableName);
+            tableDesc.addCoprocessor("org.apache.hadoop.hbase.coprocessor.AggregateImplementation");
             tableDesc.addFamily(new HColumnDescriptor(columnFamily));
             admin.createTable(tableDesc);
             System.out.println(tablename+"表已经成功创建!");
@@ -57,7 +60,7 @@ public class HbaseDemo {
      * @param data 要插入的数据
      * @throws IOException
      */
-    public static void PutData(String tableName,String row,String columnFamily,String column,String data) throws IOException{
+    public static void PutData(String tableName,String row,String columnFamily,String column,long data) throws IOException{
         HTable table = new HTable(hbaseConfiguration, tableName);
         Put put = new Put(Bytes.toBytes(row));
         put.add(Bytes.toBytes(columnFamily), Bytes.toBytes(column), Bytes.toBytes(data));
@@ -118,7 +121,7 @@ public class HbaseDemo {
         HTable table = new HTable(hbaseConfiguration, tableName);
         Scan scan = new Scan();
         //以下其实为数据的查询条件
-        scan.addColumn("baseinfo".getBytes(),"vio".getBytes());
+//        scan.addColumn("baseinfo".getBytes(),"vio".getBytes());
         scan.setRowPrefixFilter(Bytes.toBytes("row4_"));
 
         boolean hasResult = false;
@@ -161,15 +164,43 @@ public class HbaseDemo {
         try {
             System.setProperty("hadoop.home.dir","D:\\softwaredev\\hbase-1.3.0\\hadoop");
 
-            HbaseDemo.CreateTable("userinfo1", "baseinfo");
+            String tablename = "v";
 
-            HbaseDemo.PutData("userinfo1", "row4_1", "baseinfo", "vio" , "vio1");
+            HbaseSumDemo.CreateTable(tablename, "basevalue");
 
-            HbaseDemo.GetData("userinfo1", "row4_1","baseinfo","vio");
+            HbaseSumDemo.PutData(tablename, "row4_1", "basevalue", "v1" , 10L);
+            HbaseSumDemo.PutData(tablename, "row4_1", "basevalue", "v2" , 10L);
+            HbaseSumDemo.PutData(tablename, "row4_1", "basevalue", "v3" , 10L);
 
-            HbaseDemo.ScanAll("userinfo1");
+            HbaseSumDemo.PutData(tablename, "row4_2", "basevalue", "v1" , 10L);
+            HbaseSumDemo.PutData(tablename, "row4_2", "basevalue", "v2" , 10L);
+            HbaseSumDemo.PutData(tablename, "row4_2", "basevalue", "v3" , 10L);
 
-            HbaseDemo.Scan("userinfo1");
+            HbaseSumDemo.GetData(tablename, "row4_1","basevalue","v1");
+
+            HbaseSumDemo.ScanAll(tablename);
+
+            HbaseSumDemo.Scan(tablename);
+
+            //求和测试
+            AggregationClient c = new AggregationClient(hbaseConfiguration);
+
+            HTable table = new HTable(hbaseConfiguration, tablename);
+            Scan scan = new Scan();
+            //以下其实为数据的查询条件
+            scan.addColumn("basevalue".getBytes(),"v2".getBytes());
+//            scan.setRowPrefixFilter(Bytes.toBytes("row4_"));
+
+            DoubleColumnInterpreter interpreter = new DoubleColumnInterpreter();
+
+            double result = c.rowCount(table, interpreter,scan);
+            System.out.println("记录条数:" + result);
+
+            result = c.sum(table, interpreter,scan);
+            System.out.println("记录合计:" + result);
+
+            result = c.avg(table, interpreter,scan);
+            System.out.println("记录平均数:" + result);
 
 //            for(int i=0;i<100000;i++){
 //                HbaseDemo.PutData("userinfo", "row4_"+i, "baseinfo", "vio" + i, "驾驶车辆违法信息：" + i);
@@ -181,7 +212,9 @@ public class HbaseDemo {
             //HbaseDemo.Delete("userinfo","row4_2");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+         }
 
     }
 

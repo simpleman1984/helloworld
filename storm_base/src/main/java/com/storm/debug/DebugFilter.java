@@ -26,7 +26,7 @@ public class DebugFilter extends BaseFilter {
 	public boolean isKeep(TridentTuple tuple) {
 		Fields fields = tuple.getFields();
 
-		String msg = "";
+		String msg = "------------------------------------";
 		for (int i = 0; i < fields.size(); i++) {
 			String field = fields.get(i);
 			try {
