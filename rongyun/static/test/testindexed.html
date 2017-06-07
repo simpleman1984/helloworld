@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var DbName = "TalkDB1";
+    var storeName = "Msg";
+
+    var dbConnect = window.indexedDB.open(DbName,2);
+    var db;
+    dbConnect.onsuccess = function (event) {
+        //save the opened db
+        db = event.target.result;
+        console.info(db) ;
+
+        var tx = db.transaction(storeName, 'readwrite');
+        store = tx.objectStore(storeName);
+
+        tx.oncomplete = function () {
+            console.info("查询结果：：：： oncomplete",dataArr);
+        };
+
+        var req = store.openCursor(),
+            dataArr = [];
+
+        req.onsuccess = function (event) {
+            var cursor = event.target.result;
+            console.info("success",cursor);
+            if (cursor) {
+                dataArr.push(cursor.value);
+                cursor.continue();
+            }
+        };
+
+        req.onerror = function (event) {
+            showError(event.target.error.message);
+            console.info("onerror",(event.target.error));
+        };
+
+        db.close();
+    };
+    dbConnect.onerror = function (event) {
+        console.info(event.target.error.message);
+    };
+    dbConnect.onupgradeneeded = function (event) {
+        var db = event.target.result;
+        var store = db.createObjectStore(storeName, {
+            dbName: DbName,
+            storeName: storeName
+        }); //创建对象库
+    };
+
+</script>
+</body>
+</html>

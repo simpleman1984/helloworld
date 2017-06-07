@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>群聊</title>
+    <link rel="stylesheet" href="css/example.css" />
+    <link rel="stylesheet" href="css/talk.css" />
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="css/weui.min.css"/>
+</head>
+<body>
+<div class="chat">
+    <!-- 	<div class="box_hd">
+            <div class="title-wrapper">
+                <h1 class="title">大屏手机就是小米Max群</h1>
+            </div>
+        </div> -->
+    <div class="box_bd scroll-wrapper">
+        <div class="scroll-content J_scrollContent">
+            <div class="chatContent" id="chatContent">
+            </div>
+        </div>
+    </div>
+    <div class="box_ft close">
+        <div class="input-wrapper">
+            <input class="J_noticeInput" value="" id="content"/>
+            <img src="http://c1.mifile.cn/f/i/hd/2016051101/input-down.png" alt="">
+        </div>
+
+        <div class="choice-wrapper J_choiceWrapper">
+            <ul class="main-choice J_choice J_mainChoice" data-choice="0">
+                <li class="J_liNext li-3" data-target-dialog="2" data-target-choice1="2_1">
+                    <a href="javascript:startSend();">发红包</a>
+                </li>
+            </ul>
+
+            <ul class="J_choice" data-choice="2_1">
+                <li class="J_liNext li-3 no-border bg-trsp" data-target-dialog="2_1">
+
+                    <a href="javascript:void(0);">
+                        <img src="http://c1.mifile.cn/f/i/hd/2016051101/c-2-oscars.jpg" alt="30部奥斯卡最佳影片">
+                        <p>30部奥斯卡最佳影片</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="container" style="display:none;"></div>
+<script type="text/html" id="tpl_home">
+    d
+</script>
+<!-- 发红包界面 -->
+<script type="text/html" id="tpl_start_send">
+    <div class="page">
+        <div class="page__bd">
+            <div class="weui-cells__title">发红包</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">红包金额</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入红包金额">
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_vcode">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">红包分数</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入红包分数">
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" placeholder="请输入留言" rows="3"></textarea>
+                            <div class="weui-textarea-counter"><span>0</span>/200</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-btn-area">
+                    <a class="weui-btn weui-btn_primary sendBtn" href="javascript:sendRedPackets()" id="sendBtn">塞钱进红包</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- 发送人员查看界面 -->
+<script type="text/html" id="tpl_sender_hongbao_info">
+    <div class="page">
+        <div class="page__bd_spacing">
+            <div class="weui-cells__title"><i class="weui-icon-back back-home"></i>|&nbsp;红包详情</div>
+        </div>
+        <div class="weui-cells__title">红包金额88.00元，等待对方领取</div>
+        <div class="weui-panel__hd">
+            <a class="weui-cell weui-cell_access weui-cell_link" href="javascript:void(0)">
+                <div class="weui-cell__bd">查看我的红包记录</div>
+            </a>
+        </div>
+        <div class="page_bd page__bd_spacing">
+            <div class="weui-footer weui-footer_fixed-bottom">
+                <p class="weui-footer__links">
+                    <a href="javascript:home();" class="weui-footer__link">未领取的红包，将于24小时后发起退款</a>
+                </p>
+                <p class="weui-footer__text">Copyright © 2008-2016 ehometown.com</p>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- 接收人员抢红包 -->
+<script type="text/html" id="tpl_receiver_snatch_hongbao_info">
+    <div class="page">
+        <div class="page__hd page__bd_spacing">
+            <div onclick="openHongBao()" style="text-align: center;margin-top:30px;width:100px;height:100px;border-radius:50px;border:solid rgb(100,100,100) 1px;
+margin-left: auto;margin-right: auto;line-height: 100px; font-size: 30px;background-color: red;">
+                開
+            </div>
+        </div>
+    </div>
+</script>
+<!-- 接收人员查看已抢红包界面 -->
+<script type="text/html" id="tpl_receiver_query_hongbao_info">
+    <div class="page">
+        <div class="page__bd_spacing">
+            <div class="weui-cells__title"><i class="weui-icon-back back-home"></i>|&nbsp;红包详情</div>
+        </div>
+        <div class="page__bd page__bd_spacing">
+            <div class="weui-flex">
+                <div class="weui-flex__item"><div class="placeholder"></div></div>
+                <div class="weui-flex__item"><div class="placeholder">88.00<small>元</small></div></div>
+                <div class="weui-flex__item"><div class="placeholder"></div></div>
+            </div>
+        </div>
+        <div class="weui-panel__hd">
+            <a class="weui-cell weui-cell_access weui-cell_link" href="javascript:void(0)">
+                <div class="weui-cell__bd">已存入零钱，可直接提现</div>
+            </a>
+        </div>
+    </div>
+</script>
+
+<script id="messageTpl" type="text/x-dot-template">
+    {{~it :message:index}}
+    <div class="clearfix" uuid="{{=message.id}}">
+        {{? message.type == 'system'}}
+        <div class="message">
+            <p class="message_system">
+                <span class="content">{{=message.content}}</span>
+            </p>
+        </div>
+        {{??}}
+
+        <div class="message {{? message.author.id == 'me'}}me{{??}}others{{?}}">
+            <div class="avatar" data-author-id="{{=message.author.id}}">
+                <img src="{{=message.author.avatar}}" alt="{{=message.author.name}}">
+            </div>
+            <div class="content">
+                <p class="author_name">{{=message.author.name}}</p>
+                {{? message.type == 'plain'}}
+                <div class="bubble {{? message.author.id == 'me'}} bubble_primary right{{??}} bubble_default left{{?}}">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            <pre>{{=message.content}}</pre>
+                        </div>
+                    </div>
+                </div>
+                {{?? message.type == 'picture'}}
+                <div class="bubble {{? message.author.id == 'me'}} right{{??}} left{{?}} bubble_image">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            {{? message.extra == 'gallery'}}
+                            <img class="J_galleryShow" data-gallery="1" src="{{=message.content}}" />
+                            {{??}}
+                            <img class="J_img" src="{{=message.content}}" />
+                            {{?}}
+                        </div>
+                    </div>
+                </div>
+                {{?? message.type == 'hongbao'}}
+                <div class="bubble {{? message.author.id == 'me'}} right{{??}} left{{?}} bubble_image">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            {{? message.extra == 'gallery'}}
+                            <img class="J_galleryShow" data-gallery="1" src="{{=message.content}}" />
+                            {{??}}
+                            <img class="J_HongBao" src="images/hongbao.jpg" />
+                            {{?}}
+                        </div>
+                    </div>
+                </div>
+                {{?? message.type == 'video'}}
+                <div class="bubble {{? message.author.id == 'me'}} right{{??}} left{{?}} bubble_image">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            <img class="J_fpVideo" src="{{=message.content.poster}}" data-src="{{=message.content.video}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                {{?? message.type == 'animation'}}
+                <div class="bubble {{? message.author.id == 'me'}} right{{??}} left{{?}} bubble_image">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            {{=message.content}}
+                        </div>
+                    </div>
+                </div>
+                {{?}}
+            </div>
+        </div>
+        {{?}}
+
+    </div>
+    {{~}}
+</script>
+<script src="https://cdn.ronghub.com/RongIMLib-2.2.5.min.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+<script src="js/lib/jquery-3.2.1.min.js"></script>
+<script src="js/lib/indexdb.bundle.js"></script>
+<script src="js/lib/doT.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/UI.js"></script>
+<script src="js/IM.js"></script>
+<script src="js/talk.js"></script>
+
+</body>
+</html>
