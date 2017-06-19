@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/static/im0.iml" filepath="$PROJECT_DIR$/static/im0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../svn-yun/ImService/com.yun.im.iml" filepath="$PROJECT_DIR$/../../svn-yun/ImService/com.yun.im.iml" />
       <module fileurl="file://E:\workspace\workspace_helloworld\rongyun\im\static.iml" filepath="E:\workspace\workspace_helloworld\rongyun\im\static.iml" />
     </modules>
   </component>
