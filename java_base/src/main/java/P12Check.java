@@ -22,9 +22,9 @@ import java.util.List;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
-
-import org.bouncycastle.util.io.pem.PemObject;
-import org.bouncycastle.util.io.pem.PemReader;
+//
+//import org.bouncycastle.util.io.pem.PemObject;
+//import org.bouncycastle.util.io.pem.PemReader;
 
 public class P12Check {
 
@@ -79,20 +79,20 @@ public class P12Check {
 		
 		//读取ca的pem
 		//openssl pkcs12 -export -in client-cert.pem -inkey client-key.pem -certfile ca-cert.pem -out client.p12
-		PemReader reader = new PemReader(new InputStreamReader(P12Check.class.getResourceAsStream("/client-cert.pem"), Charset.defaultCharset()));
-		PemObject pemObject = reader.readPemObject();
-		System.out.println(pemObject.getType());
-		System.out.println("client-cert   = "+bytesToHexString(pemObject.getContent()));
-		
-		reader = new PemReader(new InputStreamReader(P12Check.class.getResourceAsStream("/client-key.pem"), Charset.defaultCharset()));
-		pemObject = reader.readPemObject();
-		System.out.println(pemObject.getType());
-		System.out.println("client-key   = "+bytesToHexString(pemObject.getContent()));
-		
-		reader = new PemReader(new InputStreamReader(P12Check.class.getResourceAsStream("/ca-cert.pem"), Charset.defaultCharset()));
-		pemObject = reader.readPemObject();
-		System.out.println(pemObject.getType());
-		System.out.println("ca-cert   = "+bytesToHexString(pemObject.getContent()));
+//		PemReader reader = new PemReader(new InputStreamReader(P12Check.class.getResourceAsStream("/client-cert.pem"), Charset.defaultCharset()));
+//		PemObject pemObject = reader.readPemObject();
+//		System.out.println(pemObject.getType());
+//		System.out.println("client-cert   = "+bytesToHexString(pemObject.getContent()));
+//
+//		reader = new PemReader(new InputStreamReader(P12Check.class.getResourceAsStream("/client-key.pem"), Charset.defaultCharset()));
+//		pemObject = reader.readPemObject();
+//		System.out.println(pemObject.getType());
+//		System.out.println("client-key   = "+bytesToHexString(pemObject.getContent()));
+//
+//		reader = new PemReader(new InputStreamReader(P12Check.class.getResourceAsStream("/ca-cert.pem"), Charset.defaultCharset()));
+//		pemObject = reader.readPemObject();
+//		System.out.println(pemObject.getType());
+//		System.out.println("ca-cert   = "+bytesToHexString(pemObject.getContent()));
 	}
 	
 	

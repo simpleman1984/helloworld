@@ -14,7 +14,7 @@
 		<repository>
 			<id>nexus</id>
 			<name>Nexus Snapshot Repository</name>
-			<url>http://115.28.23.160:8989/nexus/content/groups/public</url>
+			<url>http://code.jkjn.cn:8989/nexus/content/groups/public</url>
 			<!-- <url>http://maven.oschina.net/content/groups/public</url> -->
 			<snapshots>
 				<enabled>true</enabled>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">{{message}}</div>
+
+    <script>
+        var vm = new Vue({
+            el: '#example',
+            data: {
+                message: '123'
+            }
+        })
+        vm.message = 'new message44444' // 更改数据
+        //为了在数据变化之后等待 Vue 完成更新 DOM ，可以在数据变化之后立即使用 Vue.nextTick(callback)
+        Vue.nextTick(function () {
+            console.info(vm.$el);
+            vm.$el.message1 === 'new message1' // true
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../svn-yun/ImService/com.yun.im.iml" filepath="$PROJECT_DIR$/../../svn-yun/ImService/com.yun.im.iml" />
+      <module fileurl="file://E:\workspace\workspace_helloworld\rongyun\im\static.iml" filepath="E:\workspace\workspace_helloworld\rongyun\im\static.iml" />
+    </modules>
+  </component>
+</project>
