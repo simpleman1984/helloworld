@@ -1971,7 +1971,7 @@
       <workItem from="1497493085108" duration="631000" />
       <workItem from="1497785477152" duration="950000" />
       <workItem from="1497838227548" duration="4669000" />
-      <workItem from="1497876185721" duration="925000" />
+      <workItem from="1497876185721" duration="1295000" />
     </task>
     <task id="LOCAL-00001" summary="1.messagestarter可配置。">
       <created>1496846162486</created>
@@ -2152,10 +2152,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255535000" />
+    <option name="totallyTimeSpent" value="255905000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1042" extended-state="7" />
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
